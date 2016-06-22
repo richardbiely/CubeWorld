@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System;
+using UnityEngine;
 using CubeWorld.Configuration;
 
-public class GameManagerUnity : MonoBehaviour
+public class GameManagerUnity : MonoBehaviour, IDisposable
 {
     public enum GameManagerUnityState
     {
@@ -22,7 +22,7 @@ public class GameManagerUnity : MonoBehaviour
 	
 	public Material materialLiquidAnimated;
 
-    public CubeWorld.Configuration.ConfigExtraMaterials extraMaterials;
+    public ConfigExtraMaterials extraMaterials;
 
     public SurroundingsUnity surroundingsUnity;
     public WorldManagerUnity worldManagerUnity;
@@ -31,7 +31,6 @@ public class GameManagerUnity : MonoBehaviour
     public PlayerUnity playerUnity;
 
     private GameManagerUnityState state;
-    private GameManagerUnityState newState;
     private MainMenu mainMenu;
 
 	public SectorManagerUnity sectorManagerUnity;
@@ -39,15 +38,11 @@ public class GameManagerUnity : MonoBehaviour
 	public CWObjectsManagerUnity objectsManagerUnity;
     public CWFxManagerUnity fxManagerUnity;
 
-    public GameManagerUnityState State
-    {
-        get { return newState; }
-        set { this.newState = value; }
-    }
+    public GameManagerUnityState State { get; set; }
 
     public void Start()
     {
-        Application.RegisterLogCallback(HandleLog);
+        Application.logMessageReceived += HandleLog;
 
         MeshUtils.InitStaticValues();
         CubeWorldPlayerPreferences.LoadPreferences();
@@ -82,7 +77,7 @@ public class GameManagerUnity : MonoBehaviour
         System.GC.Collect(System.GC.MaxGeneration, System.GCCollectionMode.Forced);
     }
 
-    static private string GetConfigText(string resourceName)
+    private static string GetConfigText(string resourceName)
     {
         string configText = ((TextAsset)Resources.Load(resourceName)).text;
 
@@ -109,7 +104,7 @@ public class GameManagerUnity : MonoBehaviour
         return configText;
     }
 
-    static public AvailableConfigurations LoadConfiguration()
+    public static AvailableConfigurations LoadConfiguration()
     {
         AvailableConfigurations availableConfigurations = 
             new ConfigParserXML().Parse(
@@ -181,7 +176,7 @@ public class GameManagerUnity : MonoBehaviour
         
     public void StartGame()
     {
-        camera.enabled = false;
+        GetComponent<Camera>().enabled = false;
 
         LockCursor();
 
@@ -206,7 +201,7 @@ public class GameManagerUnity : MonoBehaviour
     {
         DestroyWorld();
 
-        camera.enabled = true;
+        GetComponent<Camera>().enabled = true;
 
         State = GameManagerUnityState.MAIN_MENU;
     }
@@ -252,8 +247,8 @@ public class GameManagerUnity : MonoBehaviour
             }
         }
 
-        if (newState != state)
-            state = newState;
+        if (State != state)
+            state = State;
     }
 	
 	private float textureAnimationTimer;
@@ -305,16 +300,16 @@ public class GameManagerUnity : MonoBehaviour
         }
     }
 
-    public void ReleaseCursor()
+    public static void ReleaseCursor()
     {
-        Screen.lockCursor = false;
-        Screen.showCursor = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
-    public void LockCursor()
+    public static void LockCursor()
     {
-        Screen.lockCursor = true;
-        Screen.showCursor = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void PreferencesUpdated()
@@ -333,5 +328,39 @@ public class GameManagerUnity : MonoBehaviour
             internalErrorLog = "";
         internalErrorLog += log + "\n";
     }
+
+    #region IDisposable
+
+    ~GameManagerUnity()
+    {
+        Dispose(false);
+    }
+
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    private void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            // free managed resources
+            if (registerWebServerRequest != null)
+            {
+                registerWebServerRequest.Dispose();
+                registerWebServerRequest = null;
+            }
+
+            if (mainMenu!=null)
+            {
+                mainMenu.Dispose();
+                mainMenu = null;
+            }
+        }
+    }
+
+    #endregion
 }
 

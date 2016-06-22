@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 
 namespace CubeWorld.Console
 {
     public class CWConsole : ICWConsoleListener
     {
-        private StringBuilder log = new StringBuilder("");
+        private readonly StringBuilder log = new StringBuilder("");
         private string logCopy = null;
 
         public string TextLog
@@ -33,14 +30,14 @@ namespace CubeWorld.Console
         {
         }
 
-        static private CWConsole singleton;
+        private static CWConsole singleton;
 
-        static public CWConsole Singleton
+        public static CWConsole Singleton
         {
             get { if (singleton == null) singleton = new CWConsole(); return singleton; }
         }
 
-        public void Log(CWConsole.LogLevel level, string message)
+        public void Log(LogLevel level, string message)
         {
             log.AppendLine(level.ToString() + " : " + message);
             logCopy = null;
@@ -49,17 +46,17 @@ namespace CubeWorld.Console
                 listener.Log(level, message);
         }
 
-        static public void LogError(string message)
+        public static void LogError(string message)
         {
             Singleton.Log(LogLevel.Error, message);
         }
 
-        static public void LogWarning(string message)
+        public static void LogWarning(string message)
         {
             Singleton.Log(LogLevel.Warning, message);
         }
 
-        static public void LogInfo(string message)
+        public static void LogInfo(string message)
         {
             Singleton.Log(LogLevel.Info, message);
         }

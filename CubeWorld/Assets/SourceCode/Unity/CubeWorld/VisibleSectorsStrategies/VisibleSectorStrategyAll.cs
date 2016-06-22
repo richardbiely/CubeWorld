@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using CubeWorld.Tiles;
-using CubeWorld.Avatars;
-using CubeWorld.Utils;
-using CubeWorld.Sectors;
+﻿using CubeWorld.Sectors;
 
 namespace Unity.CubeWorld.VisibleSectorsStrategies
 {

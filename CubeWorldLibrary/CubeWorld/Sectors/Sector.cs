@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using CubeWorld.Tiles;
-using CubeWorld.Utils;
+﻿using CubeWorld.Tiles;
 
 namespace CubeWorld.Sectors
 {
@@ -9,7 +6,7 @@ namespace CubeWorld.Sectors
     {
         public TilePosition sectorPosition;
 
-        public CubeWorld.World.CubeWorld world;
+        public World.CubeWorld world;
 
         public TilePosition tileOffset;
 
@@ -23,7 +20,7 @@ namespace CubeWorld.Sectors
             return sectorPosition.GetHashCode();
         }
 
-        public Sector(CubeWorld.World.CubeWorld world, TilePosition sectorPosition, TilePosition tileOffset)
+        public Sector(World.CubeWorld world, TilePosition sectorPosition, TilePosition tileOffset)
         {
             this.world = world;
             this.tileOffset = tileOffset;
@@ -32,18 +29,18 @@ namespace CubeWorld.Sectors
 		
 		public void SetSectorGraphics(ISectorGraphics graphics)
 		{
-			if (this.sectorGraphics != null)
-				this.sectorGraphics.SetSector(null);
+			if (sectorGraphics != null)
+				sectorGraphics.SetSector(null);
 			
-			this.sectorGraphics = graphics;
+			sectorGraphics = graphics;
 			
-			if (this.sectorGraphics != null)
-				this.sectorGraphics.SetSector(this);
+			if (sectorGraphics != null)
+				sectorGraphics.SetSector(this);
 		}
 		
 		public ISectorGraphics GetSectorGraphics()
 		{
-			return this.sectorGraphics;
+			return sectorGraphics;
 		}
 
         public void UpdateMesh()

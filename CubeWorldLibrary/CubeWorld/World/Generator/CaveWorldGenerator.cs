@@ -5,11 +5,11 @@ namespace CubeWorld.World.Generator
 {
     public class CaveWorldGenerator : CubeWorldGenerator
     {
-        private WorldSizeRelativeValue iterationsRV;
-        private WorldSizeRelativeValue minRadiusRV;
-        private WorldSizeRelativeValue maxRadiusRV;
-        private WorldSizeRelativeValue fromYRV;
-        private WorldSizeRelativeValue toYRV;
+        private readonly WorldSizeRelativeValue iterationsRV;
+        private readonly WorldSizeRelativeValue minRadiusRV;
+        private readonly WorldSizeRelativeValue maxRadiusRV;
+        private readonly WorldSizeRelativeValue fromYRV;
+        private readonly WorldSizeRelativeValue toYRV;
 
         public CaveWorldGenerator(
             WorldSizeRelativeValue iterationsRV, 

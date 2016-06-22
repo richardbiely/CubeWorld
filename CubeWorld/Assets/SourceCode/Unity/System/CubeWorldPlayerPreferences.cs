@@ -2,14 +2,14 @@
 
 public class CubeWorldPlayerPreferences
 {
-    static public int[] farClipPlanes;
-    static public int viewDistance;
-    static public bool showFPS;
-    static public bool showHelp;
-    static public bool showEngineStats;
-    static public SectorManagerUnity.VisibleStrategy visibleStrategy;
+    public static int[] farClipPlanes;
+    public static int viewDistance;
+    public static bool showFPS;
+    public static bool showHelp;
+    public static bool showEngineStats;
+    public static SectorManagerUnity.VisibleStrategy visibleStrategy;
 
-    static public void LoadPreferences()
+    public static void LoadPreferences()
     {
         farClipPlanes = new int[6];
         farClipPlanes[0] = 1024;
@@ -26,7 +26,7 @@ public class CubeWorldPlayerPreferences
         visibleStrategy = (SectorManagerUnity.VisibleStrategy) System.Enum.Parse(typeof(SectorManagerUnity.VisibleStrategy), PlayerPrefs.GetString("VisibleStrategy", "All"), true);
     }
 
-    static public void StorePreferences()
+    public static void StorePreferences()
     {
         try
         {

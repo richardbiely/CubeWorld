@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
-using CubeWorld.Tiles;
 
 public class ItemUnity : MonoBehaviour
 {

@@ -1,11 +1,9 @@
-﻿using CubeWorld;
-using CubeWorld.Tiles;
+﻿using CubeWorld.Tiles;
 using CubeWorld.Tiles.Rules;
 using CubeWorld.World.Generator;
 using System.Xml;
 using System.Collections.Generic;
 using CubeWorld.World.Lights;
-using CubeWorld.Configuration;
 using CubeWorld.Items;
 using CubeWorld.Avatars;
 using CubeWorld.World.Objects;
@@ -107,23 +105,23 @@ namespace CubeWorld.Configuration
             return extra;
         }
 
-        static int GetElementIntValue(XmlElement x, string name)
+        private static int GetElementIntValue(XmlElement x, string name)
         {
             return int.Parse(x[name].InnerText);
         }
 
-        static int GetAttributeIntValue(XmlElement x, string name)
+        private static int GetAttributeIntValue(XmlElement x, string name)
         {
             return int.Parse(x.GetAttribute(name));
         }
 
-        static float GetAttributeFloatValue(XmlElement x, string name)
+        private static float GetAttributeFloatValue(XmlElement x, string name)
         {
             return float.Parse(x.GetAttribute(name), System.Globalization.CultureInfo.InvariantCulture);
         }
 
 
-        static private Vector3 GetAttributeVector3Value(XmlElement x, string name, Vector3 defaultValue)
+        private static Vector3 GetAttributeVector3Value(XmlElement x, string name, Vector3 defaultValue)
         {
             if (string.IsNullOrEmpty(x.GetAttribute(name)) == false)
             {
@@ -137,7 +135,7 @@ namespace CubeWorld.Configuration
             return defaultValue;
         }
 
-        static private Vector3 GetAttributeVector3Value(XmlElement x, string name)
+        private static Vector3 GetAttributeVector3Value(XmlElement x, string name)
         {
             string[] s = x.GetAttribute(name).Split(',');
             return new Vector3(
@@ -146,7 +144,7 @@ namespace CubeWorld.Configuration
                 float.Parse(s[2], System.Globalization.CultureInfo.InvariantCulture));
         }
 
-        static private TilePosition GetAttributeTilePositionValue(XmlElement x, string name)
+        private static TilePosition GetAttributeTilePositionValue(XmlElement x, string name)
         {
             string[] s = x.GetAttribute(name).Split(',');
             return new TilePosition(
@@ -155,7 +153,7 @@ namespace CubeWorld.Configuration
                 int.Parse(s[2]));
         }
 
-        static private TilePosition GetAttributeDeltaValue(XmlElement x)
+        private static TilePosition GetAttributeDeltaValue(XmlElement x)
         {
             return new TilePosition(
                     GetAttributeIntValue(x, "dx", 0),
@@ -163,7 +161,7 @@ namespace CubeWorld.Configuration
                     GetAttributeIntValue(x, "dz", 0));
         }
 
-        static float GetAttributeFloatValue(XmlElement x, string name, float defaultValue)
+        private static float GetAttributeFloatValue(XmlElement x, string name, float defaultValue)
         {
             if (string.IsNullOrEmpty(x.GetAttribute(name)) == false)
                 return float.Parse(x.GetAttribute(name), System.Globalization.CultureInfo.InvariantCulture);
@@ -171,7 +169,7 @@ namespace CubeWorld.Configuration
             return defaultValue;
         }
 
-        static int GetAttributeIntValue(XmlElement x, string name, int defaultValue)
+        private static int GetAttributeIntValue(XmlElement x, string name, int defaultValue)
         {
             if (string.IsNullOrEmpty(x.GetAttribute(name)) == false)
                 return int.Parse(x.GetAttribute(name));
@@ -179,7 +177,7 @@ namespace CubeWorld.Configuration
             return defaultValue;
         }
 
-        static WorldSizeRelativeValue GetAttributeRelativeValue(XmlElement x, string name, int defaultValue)
+        private static WorldSizeRelativeValue GetAttributeRelativeValue(XmlElement x, string name, int defaultValue)
         {
             if (string.IsNullOrEmpty(x.GetAttribute(name)) == false)
                 return new WorldSizeRelativeValue(x.GetAttribute(name));
@@ -187,12 +185,12 @@ namespace CubeWorld.Configuration
             return new WorldSizeRelativeValue(defaultValue.ToString());
         }
 
-        static WorldSizeRelativeValue GetAttributeRelativeValue(XmlElement x, string name)
+        private static WorldSizeRelativeValue GetAttributeRelativeValue(XmlElement x, string name)
         {
             return new WorldSizeRelativeValue(x.GetAttribute(name));
         }
 
-        static XmlElement[] GetChildElements(XmlElement x)
+        private static XmlElement[] GetChildElements(XmlElement x)
         {
             List<XmlElement> childs = new List<XmlElement>();
 
@@ -203,12 +201,12 @@ namespace CubeWorld.Configuration
             return childs.ToArray();
         }
 
-        static string GetAttributeStringValue(XmlElement x, string name)
+        private static string GetAttributeStringValue(XmlElement x, string name)
         {
             return x.GetAttribute(name);
         }
 
-        static string GetAttributeStringValue(XmlElement x, string name, string defaultValue)
+        private static string GetAttributeStringValue(XmlElement x, string name, string defaultValue)
         {
             if (string.IsNullOrEmpty(x.GetAttribute(name)) == false)
                 return x.GetAttribute(name);
@@ -216,12 +214,12 @@ namespace CubeWorld.Configuration
             return defaultValue;
         }
 
-        static bool GetAttributeBoolValue(XmlElement x, string name)
+        private static bool GetAttributeBoolValue(XmlElement x, string name)
         {
             return bool.Parse(x.GetAttribute(name));
         }
 
-        static bool GetAttributeBoolValue(XmlElement x, string name, bool defaultValue)
+        private static bool GetAttributeBoolValue(XmlElement x, string name, bool defaultValue)
         {
             if (string.IsNullOrEmpty(x.GetAttribute(name)) == false)
                 return bool.Parse(x.GetAttribute(name));

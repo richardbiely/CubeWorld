@@ -1,4 +1,3 @@
-using System;
 using CubeWorld.Serialization;
 
 namespace CubeWorld.World.Objects
@@ -25,7 +24,7 @@ namespace CubeWorld.World.Objects
 
         public CWDefinition(DefinitionType definitionType)
 		{
-			this.type = definitionType;
+			type = definitionType;
 		}
 
         public virtual void Serialize(Serializer serializer)

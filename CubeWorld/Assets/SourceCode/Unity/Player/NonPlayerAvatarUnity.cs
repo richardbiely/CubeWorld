@@ -1,7 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using CubeWorld.Tiles;
-using CubeWorld.World.Objects;
 
 public class NonPlayerAvatarUnity : AvatarUnity
 {

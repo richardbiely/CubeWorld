@@ -5,14 +5,14 @@ namespace CubeWorld.World.Generator
 {
     public class DepositWorldGenerator : CubeWorldGenerator
     {
-        private WorldSizeRelativeValue fromYRV;
-        private WorldSizeRelativeValue toYRV;
-        private WorldSizeRelativeValue minRadiusRV;
-        private WorldSizeRelativeValue maxRadiusRV;
-        private WorldSizeRelativeValue iterationsRV;
-        private byte overTile;
-        private byte tileType;
-        private bool allowEmptyAbove;
+        private readonly WorldSizeRelativeValue fromYRV;
+        private readonly WorldSizeRelativeValue toYRV;
+        private readonly WorldSizeRelativeValue minRadiusRV;
+        private readonly WorldSizeRelativeValue maxRadiusRV;
+        private readonly WorldSizeRelativeValue iterationsRV;
+        private readonly byte overTile;
+        private readonly byte tileType;
+        private readonly bool allowEmptyAbove;
 
         public DepositWorldGenerator(
             WorldSizeRelativeValue fromYRV,

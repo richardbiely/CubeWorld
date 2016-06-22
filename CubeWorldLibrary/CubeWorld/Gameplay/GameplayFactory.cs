@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace CubeWorld.Gameplay
+﻿namespace CubeWorld.Gameplay
 {
     public class GameplayFactory
     {
-        static private GameplayDefinition[] gameplays;
+        private static GameplayDefinition[] gameplays;
 
-        static public GameplayDefinition[] AvailableGameplays
+        public static GameplayDefinition[] AvailableGameplays
         {
             get
             {
@@ -26,7 +21,7 @@ namespace CubeWorld.Gameplay
             }
         }
 
-        static public BaseGameplay GetGameplayById(string id)
+        public static BaseGameplay GetGameplayById(string id)
         {
             foreach (GameplayDefinition gameplayDefinition in AvailableGameplays)
                 if (gameplayDefinition.id == id)

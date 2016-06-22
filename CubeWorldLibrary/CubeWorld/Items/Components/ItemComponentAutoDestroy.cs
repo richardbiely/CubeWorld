@@ -1,9 +1,4 @@
-﻿using System;
-
-using CubeWorld.World.Objects;
-using CubeWorld.Utils;
-using CubeWorld.Items;
-using CubeWorld.Tiles;
+﻿using CubeWorld.World.Objects;
 
 namespace CubeWorld.Items.Components
 {

@@ -11,7 +11,7 @@ namespace CubeWorld.Avatars.Components
 
         protected override void OnAddedToObject(CWObject cwobject)
         {
-            this.avatar = (Avatar) cwobject;
+            avatar = (Avatar) cwobject;
         }
 
         protected override void OnRemovedFromObject()

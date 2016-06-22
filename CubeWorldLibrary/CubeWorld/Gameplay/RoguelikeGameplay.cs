@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using CubeWorld.World.Generator;
+﻿using CubeWorld.World.Generator;
 using CubeWorld.Tiles;
-using CubeWorld.Utils;
 using CubeWorld.Items;
 
 namespace CubeWorld.Gameplay
@@ -47,11 +42,11 @@ namespace CubeWorld.Gameplay
             inventory.entries.Add(ie);
         }
 
-        public override CubeWorld.World.Generator.GeneratorProcess Generate(CubeWorld.Configuration.Config config)
+        public override GeneratorProcess Generate(Configuration.Config config)
         {
             RoguelikeWorldGenerator generator = new RoguelikeWorldGenerator(world);
 
-            this.playerStartPosition = generator.playerStartPosition;
+            playerStartPosition = generator.playerStartPosition;
 
             return world.tileManager.Generate(generator);
         }

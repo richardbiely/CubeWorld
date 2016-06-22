@@ -5,7 +5,7 @@ using UnityEngine;
 using CubeWorld.Tiles;
 using CubeWorld.World.Objects;
 using CubeWorld.Items;
-using CubeWorld.Avatars;
+using Object = UnityEngine.Object;
 
 public class CWObjectsManagerUnity : ICWListener
 {
@@ -26,22 +26,22 @@ public class CWObjectsManagerUnity : ICWListener
 	public void Clear()
 	{
         foreach (TileUnity unityTile in unityTiles)
-            GameObject.DestroyImmediate(unityTile.gameObject);
+            Object.DestroyImmediate(unityTile.gameObject);
 
         unityTiles.Clear();
 		
         foreach (ItemUnity unityItem in unityItems)
-            GameObject.DestroyImmediate(unityItem.gameObject);
+            Object.DestroyImmediate(unityItem.gameObject);
 
         unityItems.Clear();
 
         foreach (ItemTileUnity unityItemTile in unityItemTiles)
-            GameObject.DestroyImmediate(unityItemTile.gameObject);
+            Object.DestroyImmediate(unityItemTile.gameObject);
 
         unityItemTiles.Clear();
 
         foreach (AvatarUnity unityAvatar in unityAvatars)
-            GameObject.DestroyImmediate(unityAvatar.gameObject);
+            Object.DestroyImmediate(unityAvatar.gameObject);
 
         unityAvatars.Clear();
     }
@@ -62,7 +62,7 @@ public class CWObjectsManagerUnity : ICWListener
     {
         unityTiles.Remove(g.GetComponent<TileUnity>());
 
-        GameObject.Destroy(g);
+        Object.Destroy(g);
     }
 
     public GameObject CreateItemGameObject(Item item)
@@ -81,7 +81,7 @@ public class CWObjectsManagerUnity : ICWListener
 	{
     	unityItems.Remove(g.GetComponent<ItemUnity>());
 		
-		GameObject.Destroy(g);
+		Object.Destroy(g);
 	}
 
     public GameObject CreateItemTileGameObject(ItemTile item)
@@ -100,7 +100,7 @@ public class CWObjectsManagerUnity : ICWListener
     {
         unityItemTiles.Remove(g.GetComponent<ItemTileUnity>());
 
-        GameObject.Destroy(g);
+        Object.Destroy(g);
     }
 
     public GameObject CreateAvatarGameObject(CubeWorld.Avatars.Avatar avatar)
@@ -110,7 +110,7 @@ public class CWObjectsManagerUnity : ICWListener
 
         if (avatar.definition.id == "player")
         {
-            g = (GameObject) GameObject.Instantiate(Resources.Load("Prefabs/Player", typeof(GameObject)));
+            g = (GameObject) Object.Instantiate(Resources.Load("Prefabs/Player", typeof(GameObject)));
 
             avatarUnity = g.GetComponent<PlayerUnity>();
 
@@ -137,7 +137,7 @@ public class CWObjectsManagerUnity : ICWListener
     {
         unityAvatars.Remove(g.GetComponent<AvatarUnity>());
 
-        GameObject.Destroy(g);
+        Object.Destroy(g);
     }
 
    
@@ -164,7 +164,7 @@ public class CWObjectsManagerUnity : ICWListener
                 break;
            
             default:
-				throw new System.Exception("Unknown game object to create");
+				throw new Exception("Unknown game object to create");
 		}
 		
 		return go;
@@ -181,7 +181,7 @@ public class CWObjectsManagerUnity : ICWListener
         else if (go.GetComponent<AvatarUnity>())
             RemoveAvatarGameObject(go);
         else
-			throw new System.Exception("Unknown game object to destroy");
+			throw new Exception("Unknown game object to destroy");
 	}
 
     public GameObject FindGameObject(CWObject cwObject)

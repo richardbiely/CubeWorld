@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace CubeWorld.Gameplay
+﻿namespace CubeWorld.Gameplay
 {
     public class GameplayDefinition
     {
@@ -15,7 +10,7 @@ namespace CubeWorld.Gameplay
 
         public GameplayDefinition(string name, string description, BaseGameplay gameplay, bool hasCustomGenerator)
         {
-            this.id = gameplay.Id;
+            id = gameplay.Id;
             this.name = name;
             this.description = description;
             this.gameplay = gameplay;

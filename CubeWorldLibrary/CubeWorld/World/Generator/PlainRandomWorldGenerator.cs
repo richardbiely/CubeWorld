@@ -6,10 +6,10 @@ namespace CubeWorld.World.Generator
 {
     public class PlainRandomWorldGenerator : CubeWorldGenerator
     {
-        private WorldSizeRelativeValue fromYRV;
-        private WorldSizeRelativeValue toYRV;
-        private TileTypeProbability[] probabilities;
-        private int probabilityRange;
+        private readonly WorldSizeRelativeValue fromYRV;
+        private readonly WorldSizeRelativeValue toYRV;
+        private readonly TileTypeProbability[] probabilities;
+        private readonly int probabilityRange;
 
         public struct TileTypeProbability
         {
@@ -48,10 +48,10 @@ namespace CubeWorld.World.Generator
                 probs[i] = p;
             }
 
-            this.probabilities = probs.ToArray();
+            probabilities = probs.ToArray();
         }
 
-        static private int SortByProbability(TileTypeProbability a, TileTypeProbability b)
+        private static int SortByProbability(TileTypeProbability a, TileTypeProbability b)
         {
             return b.probability.CompareTo(a.probability);
         }

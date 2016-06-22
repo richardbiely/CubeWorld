@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using CubeWorld.Tiles.Rules;
 using CubeWorld.Tiles;
 using CubeWorld.World.Objects;
@@ -66,7 +65,7 @@ public class PlayerControllerUnity : MonoBehaviour
         if (playerUnity.gameManagerUnity.State == GameManagerUnity.GameManagerUnityState.GAME &&
             playerUnity.playerGUI.ActiveState == PlayerGUI.State.NORMAL)
         {
-            if (Screen.lockCursor == false)
+            if (Cursor.lockState==CursorLockMode.None)
             {
                 //Auto pause if the user leaves the game for some reason (ALT+TAB, etc..)
                 playerUnity.gameManagerUnity.Pause();
@@ -117,7 +116,7 @@ public class PlayerControllerUnity : MonoBehaviour
 				goInHand = null;
 			}
 			
-			this.currentObjectInHand = playerUnity.objectInHand;
+			currentObjectInHand = playerUnity.objectInHand;
 			
 			if (currentObjectInHand != null)
 			{
@@ -312,7 +311,7 @@ public class PlayerControllerUnity : MonoBehaviour
 
     private void UpdateCameraRotation()
     {
-        if (Screen.lockCursor)
+        if (Cursor.lockState==CursorLockMode.Locked)
         {
             if (axes == RotationAxes.MouseXAndY)
             {

@@ -1,5 +1,4 @@
-﻿using CubeWorld.Tiles;
-using CubeWorld.Utils;
+﻿using CubeWorld.Utils;
 using System;
 using CubeWorld.Serialization;
 
@@ -165,7 +164,7 @@ namespace CubeWorld.Tiles.Rules
             return level;
         }
 
-        static private int GetLowerLevel(TilePosition dir, TileManager tileManager, Tile tile, TilePosition pos, int minLevel)
+        private static int GetLowerLevel(TilePosition dir, TileManager tileManager, Tile tile, TilePosition pos, int minLevel)
         {
             TilePosition posNear = pos + dir;
             if (tileManager.IsValidTile(posNear) && tileManager.GetTileType(posNear) == tile.tileType)
@@ -178,7 +177,7 @@ namespace CubeWorld.Tiles.Rules
             return minLevel;
         }
 
-        static private void FindFall(TilePosition dir, TileManager tileManager, Tile tile, TilePosition pos, ref TilePosition nearDirection, ref int nearDistance)
+        private static void FindFall(TilePosition dir, TileManager tileManager, Tile tile, TilePosition pos, ref TilePosition nearDirection, ref int nearDistance)
         {
             TilePosition posNear = pos;
 

@@ -1,8 +1,5 @@
-﻿using System;
-
-using CubeWorld.World.Objects;
+﻿using CubeWorld.World.Objects;
 using CubeWorld.Utils;
-using CubeWorld.Items;
 using CubeWorld.Tiles;
 using CubeWorld.Avatars;
 
@@ -37,7 +34,7 @@ namespace CubeWorld.Items.Components
 
             if (distanceToPlayer < PLAYER_CATCH_DISTANCE)
             {
-                CWObject objectToAdd = this.item;
+                CWObject objectToAdd = item;
 
                 if (objectToAdd.definition.type == CWDefinition.DefinitionType.ItemTile)
                     objectToAdd = new DynamicTile(item.world, ((ItemTileDefinition) item.definition).tileDefinition, -1);

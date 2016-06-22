@@ -13,7 +13,7 @@
 
         internal void RemovedFromObject()
         {
-            this.cwobject = null;
+            cwobject = null;
 
             OnRemovedFromObject();
         }

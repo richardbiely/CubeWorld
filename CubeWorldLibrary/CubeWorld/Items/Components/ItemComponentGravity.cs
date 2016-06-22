@@ -2,7 +2,6 @@
 
 using CubeWorld.World.Objects;
 using CubeWorld.Utils;
-using CubeWorld.Items;
 using CubeWorld.Tiles;
 
 namespace CubeWorld.Items.Components

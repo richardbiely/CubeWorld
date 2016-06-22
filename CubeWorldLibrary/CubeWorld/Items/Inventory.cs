@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using CubeWorld.World.Objects;
 using CubeWorld.Tiles;
@@ -7,7 +6,7 @@ namespace CubeWorld.Items
 {
 	public class Inventory
 	{
-        private CWObject owner;
+        private readonly CWObject owner;
 
         public Inventory(CWObject owner)
         {
@@ -127,7 +126,7 @@ namespace CubeWorld.Items
                         //It's an item
                         Item item;
 
-                        if (itemDefinition.type == CubeWorld.World.Objects.CWDefinition.DefinitionType.ItemTile)
+                        if (itemDefinition.type == CWDefinition.DefinitionType.ItemTile)
                             item = new ItemTile(owner.world, (ItemTileDefinition)itemDefinition, -1);
                         else
                             item = new Item(owner.world, itemDefinition, -1);

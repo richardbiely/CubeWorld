@@ -5,12 +5,12 @@ namespace CubeWorld.World.Generator
 {
     public class MidpointDisplacementWorldGenerator : CubeWorldGenerator
     {
-        private byte tileType;
+        private readonly byte tileType;
         public float roughness;
-        private Random rnd = new Random();
+        private readonly Random rnd = new Random();
         private float[,] map;
-        private WorldSizeRelativeValue fromYRV;
-        private WorldSizeRelativeValue toYRV;
+        private readonly WorldSizeRelativeValue fromYRV;
+        private readonly WorldSizeRelativeValue toYRV;
         private int mapDimension;
 
 
@@ -80,7 +80,7 @@ namespace CubeWorld.World.Generator
 
         //Randomly displaces value for midpoint depending on size
         //of grid piece.
-        float Displace(float num)
+        private float Displace(float num)
         {
             float max = num / (float)(width + height) * roughness;
             return ((float)rnd.NextDouble() - 0.5f) * max;
@@ -89,7 +89,7 @@ namespace CubeWorld.World.Generator
         //This is the recursive function that implements the random midpoint
         //displacement algorithm.  It will call itself until the grid pieces
         //become smaller than one pixel.	
-        void DivideGrid(int x, int y, int width, int height, float c1, float c2, float c3, float c4)
+        private void DivideGrid(int x, int y, int width, int height, float c1, float c2, float c3, float c4)
         {
             float Edge1, Edge2, Edge3, Edge4, Middle;
             int newWidth = width / 2;

@@ -1,5 +1,3 @@
-using System;
-using CubeWorld.Tiles;
 using CubeWorld.World.Objects;
 
 namespace CubeWorld.World

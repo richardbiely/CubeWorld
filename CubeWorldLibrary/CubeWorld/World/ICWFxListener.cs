@@ -1,5 +1,4 @@
 using System;
-using CubeWorld.Tiles;
 using CubeWorld.World.Objects;
 using CubeWorld.Utils;
 

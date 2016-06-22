@@ -23,10 +23,10 @@ namespace CubeWorld.Tiles
         public void AddActionRule(TileActionRule actionRule)
         {
             List<TileActionRule> r = new List<TileActionRule>();
-            if (this.actionRules != null)
-                r.AddRange(this.actionRules);
+            if (actionRules != null)
+                r.AddRange(actionRules);
             r.Add(actionRule);
-            this.actionRules = r.ToArray();
+            actionRules = r.ToArray();
         }
 
         public void Serialize(Serializer serializer)

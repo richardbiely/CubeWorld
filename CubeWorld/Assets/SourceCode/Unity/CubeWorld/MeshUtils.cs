@@ -3,17 +3,17 @@ using CubeWorld.Tiles;
 
 public struct MeshUtils
 {
-    static public Vector3[] faceVectorsNormal;
-    static public Vector3[] faceVectorsFire;
-    static public Vector3[] faceNormals;
-    static public bool[] faceVectorsFireAvailable;
-    static public TilePosition[] faceNormalsTile;
-    static public float[] faceBright;
-    static public float[] luminanceMapper;
+    public static Vector3[] faceVectorsNormal;
+    public static Vector3[] faceVectorsFire;
+    public static Vector3[] faceNormals;
+    public static bool[] faceVectorsFireAvailable;
+    public static TilePosition[] faceNormalsTile;
+    public static float[] faceBright;
+    public static float[] luminanceMapper;
 
     public const int MAX_LIQUID_LEVELS = 8;
 
-    static public float GetLiquidHeightForLevel(int level)
+    public static float GetLiquidHeightForLevel(int level)
     {
         if (level <= MAX_LIQUID_LEVELS)
             return (MAX_LIQUID_LEVELS - level) / (float)MAX_LIQUID_LEVELS;
@@ -21,7 +21,7 @@ public struct MeshUtils
             return 0;
     }
 
-    static public void InitStaticValues()
+    public static void InitStaticValues()
     {
         faceVectorsNormal = new Vector3[6 * 4];
         faceNormals = new Vector3[6];

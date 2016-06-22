@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using CubeWorld.Tiles;
 using CubeWorld.Avatars;
 using CubeWorld.Items;
 using CubeWorld.Gameplay.Multiplayer;
-using CubeWorld.World.Generator;
-using System.Net.Sockets;
 using CubeWorld.Utils;
 using System.IO;
 using SourceCode.CubeWorld.Utils;
@@ -16,8 +11,8 @@ namespace CubeWorld.Gameplay
 {
     public class MultiplayerClientGameplay : BaseGameplay, IMultiplayerClientListener
     {
-        private MultiplayerStats stats;
-        private MultiplayerClient client;
+        private readonly MultiplayerStats stats;
+        private readonly MultiplayerClient client;
         public byte[] initializationData;
         public bool initializationDataReceived;
 
@@ -33,7 +28,7 @@ namespace CubeWorld.Gameplay
             client = new MultiplayerClient(server, port, this);
         }
 
-        public override void Init(CubeWorld.World.CubeWorld world)
+        public override void Init(World.CubeWorld world)
         {
             base.Init(world);
         }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using CubeWorld.Tiles;
 using CubeWorld.Utils;
@@ -11,7 +10,7 @@ namespace CubeWorld.Sectors
         public const int SECTOR_SIZE_BITS = 4;
         public const int SECTOR_SIZE = 1 << SECTOR_SIZE_BITS;
 
-        public CubeWorld.World.CubeWorld world;
+        public World.CubeWorld world;
 
         public int xSectors, ySectors, zSectors;
         public int xSectorsBits, ySectorsBits, zSectorsBits, xySectorsBits;
@@ -23,7 +22,7 @@ namespace CubeWorld.Sectors
         private bool pendingSectorsUpdateLightOrderValid = false;
         private List<Sector> pendingSectorsUpdateLight = new List<Sector>();
 
-        public SectorManager(CubeWorld.World.CubeWorld world)
+        public SectorManager(World.CubeWorld world)
         {
             this.world = world;
         }
@@ -132,7 +131,7 @@ namespace CubeWorld.Sectors
             }
         }
 
-        static private TilePosition currentPlayerPositionForSort;
+        private static TilePosition currentPlayerPositionForSort;
 
         public void Update(float deltaTime)
         {
@@ -180,7 +179,7 @@ namespace CubeWorld.Sectors
             }
         }
 
-        static private int CompareSectorsByDistanceToPlayer(Sector sector1, Sector sector2)
+        private static int CompareSectorsByDistanceToPlayer(Sector sector1, Sector sector2)
         {
             int dist1 = (currentPlayerPositionForSort - sector1.tileOffset).GetDistanceSquared();
             int dist2 = (currentPlayerPositionForSort - sector2.tileOffset).GetDistanceSquared();

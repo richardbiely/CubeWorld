@@ -1,11 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using CubeWorld.Tiles;
 using CubeWorld.World.Generator;
 using CubeWorld.Tiles.Rules;
-using CubeWorld.Sectors;
-using CubeWorld.Utils;
 using CubeWorld.World.Lights;
 using CubeWorld.Tiles.Components;
 using SourceCode.CubeWorld.Utils;
@@ -14,7 +10,7 @@ namespace CubeWorld.Tiles
 {
     public class TileManager
     {
-		public CubeWorld.World.CubeWorld world;
+		public World.CubeWorld world;
 		
         private Tile[] tiles;
 		private Dictionary<TilePosition, DynamicTile> dynamicTiles = new Dictionary<TilePosition, DynamicTile>();
@@ -24,7 +20,7 @@ namespace CubeWorld.Tiles
             get { return new List<DynamicTile>(dynamicTiles.Values).ToArray(); }
         }
 		
-        public TileDefinition[] tileDefinitions;
+        public TileDefinition[] TileDefinitions;
 
         public int sizeXbits;
         public int sizeYbits;
@@ -46,16 +42,11 @@ namespace CubeWorld.Tiles
 
         private byte[] topPositions;
         
-        private Dictionary<TilePosition, DynamicTile> dynamicTilesTimeout = new Dictionary<TilePosition, DynamicTile>();
+        private readonly Dictionary<TilePosition, DynamicTile> dynamicTilesTimeout = new Dictionary<TilePosition, DynamicTile>();
 
-        private uint ticks;
+        public uint Ticks { get; private set; }
 
-        public uint Ticks
-        {
-            get { return ticks; }
-        }
-
-        public TileManager(CubeWorld.World.CubeWorld world)
+        public TileManager(World.CubeWorld world)
         {
 			this.world = world;
             pendingTileUpdates = pendingTileUpdates1;
@@ -76,9 +67,9 @@ namespace CubeWorld.Tiles
             tiles = new Tile[1 << (sizeXbits + sizeYbits + sizeZbits)];
             topPositions = new byte[1 << (sizeXbits + sizeZbits)];
 
-            this.tileDefinitions = tileDefinitions;
+            TileDefinitions = tileDefinitions;
 
-            this.ticks = (uint) new Random().Next(0, 100);
+            Ticks = (uint) new Random().Next(0, 100);
         }
 
         public GeneratorProcess Generate(CubeWorldGenerator generator)
@@ -91,7 +82,7 @@ namespace CubeWorld.Tiles
             chained.AddGenertor(generator);
             chained.AddGenertor(new InternalWorldInitializationGenerator());
 
-            return new GeneratorProcess(chained, this.world);
+            return new GeneratorProcess(chained, world);
         }
 
         private class InternalWorldInitializationGenerator : CubeWorldGenerator
@@ -109,7 +100,7 @@ namespace CubeWorld.Tiles
                 return generationStep;
             }
 
-            public override bool Generate(CubeWorld.World.CubeWorld world)
+            public override bool Generate(World.CubeWorld world)
             {
                 switch (generationStep)
                 {
@@ -164,12 +155,12 @@ namespace CubeWorld.Tiles
 
         public TileDefinition GetTileDefinition(byte type)
         {
-			return tileDefinitions[type];
+			return TileDefinitions[type];
         }
 		
         public TileDefinition GetTileDefinitionById(string id)
         {
-            foreach (TileDefinition tileDefinition in tileDefinitions)
+            foreach (TileDefinition tileDefinition in TileDefinitions)
                 if (tileDefinition.id == id)
                     return tileDefinition;
 
@@ -795,7 +786,7 @@ namespace CubeWorld.Tiles
                 }
             }
 
-            ticks++;
+            Ticks++;
         }
 
         private void UpdateTile(TilePosition pos)
@@ -853,8 +844,8 @@ namespace CubeWorld.Tiles
         public void Save(System.IO.BinaryWriter bw)
         {
             //Write tile definition "type" - "id" mapper (used to load the map if the "type" of each tile changes)
-            bw.Write((int)tileDefinitions.Length);
-            foreach (TileDefinition def in tileDefinitions)
+            bw.Write((int)TileDefinitions.Length);
+            foreach (TileDefinition def in TileDefinitions)
             {
                 bw.Write((byte)def.tileType);
                 bw.Write((string)def.id);
@@ -907,7 +898,7 @@ namespace CubeWorld.Tiles
                 string id = br.ReadString();
                 byte newType = 0;
 
-                foreach (TileDefinition td in tileDefinitions)
+                foreach (TileDefinition td in TileDefinitions)
                 {
                     if (td.id == id)
                     {
@@ -927,7 +918,7 @@ namespace CubeWorld.Tiles
 			
             //Create empty world
             //The world is already created in CubeLoad.Load()
-            //Create(tileDefinitions, sizeXbits, sizeYbits, sizeZbits);
+            //Create(TileDefinitions, sizeXbits, sizeYbits, sizeZbits);
 			
             //Read tiles
 			byte[] tileBytes = br.ReadBytes(sizeX * sizeY * sizeZ * 4);
@@ -991,7 +982,7 @@ namespace CubeWorld.Tiles
         {
             bool[] mapTileDefinitionHasRule = new bool[byte.MaxValue];
 
-            foreach (TileDefinition td in tileDefinitions)
+            foreach (TileDefinition td in TileDefinitions)
                 mapTileDefinitionHasRule[td.tileType] = (td.tileUpdateRules != null);
 
             for (int x = 0; x < sizeX; x++)
@@ -1016,7 +1007,7 @@ namespace CubeWorld.Tiles
                 tile.Clear();
 
             tiles = null;
-            tileDefinitions = null;
+            TileDefinitions = null;
             topPositions = null;
 			dynamicTiles = null;
 

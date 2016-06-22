@@ -11,10 +11,10 @@ namespace CubeWorld.Tiles
         public void AddRule(TileRule rule)
         {
             List<TileRule> r = new List<TileRule>();
-            if (this.rules != null)
-                r.AddRange(this.rules);
+            if (rules != null)
+                r.AddRange(rules);
             r.Add(rule);
-            this.rules = r.ToArray();
+            rules = r.ToArray();
         }
 
         public void Serialize(Serializer serializer)

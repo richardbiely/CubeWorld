@@ -1,7 +1,4 @@
-﻿using CubeWorld.World.Generator;
-using CubeWorld.Tiles;
-using CubeWorld.World.Lights;
-using CubeWorld.Configuration;
+﻿using CubeWorld.Tiles;
 using CubeWorld.Items;
 using CubeWorld.Avatars;
 using CubeWorld.Gameplay;

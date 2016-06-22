@@ -4,22 +4,22 @@ namespace CubeWorld.World.Lights
 {
     public class LightModelAmbient
     {
-        static private long PositionToInt(long x, long y, long z)
+        private static long PositionToInt(long x, long y, long z)
         {
             return x | (y << 16) | (z << 32);
         }
 
-        static private TilePosition IntToPosition(long v)
+        private static TilePosition IntToPosition(long v)
         {
             return new TilePosition((int)(v & 0xFFFF), (int)((v >> 16) & 0xFFFF), (int)(v >> 32));
         }
 
-        static private HashSet<long> updatedTiles = new HashSet<long>();
-        static private HashSet<long> lightsToRecalculate = new HashSet<long>();
-        static private List<long> pendingUpdateLights = new List<long>();
-        static private List<long> nextPendingUpdateLights = new List<long>();
+        private static readonly HashSet<long> updatedTiles = new HashSet<long>();
+        private static readonly HashSet<long> lightsToRecalculate = new HashSet<long>();
+        private static List<long> pendingUpdateLights = new List<long>();
+        private static List<long> nextPendingUpdateLights = new List<long>();
 
-        static public void InitLuminance(TileManager tileManager)
+        public static void InitLuminance(TileManager tileManager)
         {
             for (int x = 0; x < tileManager.sizeX; x++)
             {
@@ -62,7 +62,7 @@ namespace CubeWorld.World.Lights
             UpdateLuminanceLightVector(tileManager);
         }
 
-        static public void UpdateLuminanceDark(TileManager tileManager, TilePosition from)
+        public static void UpdateLuminanceDark(TileManager tileManager, TilePosition from)
 		{
             if (tileManager.GetTileAmbientLuminance(from) == 0)
                 return;
@@ -150,7 +150,7 @@ namespace CubeWorld.World.Lights
 			UpdateLuminanceLightVector(tileManager);
 		}		
 		
-		static public void UpdateLuminanceLight(TileManager tileManager, TilePosition from, byte luminance)
+		public static void UpdateLuminanceLight(TileManager tileManager, TilePosition from, byte luminance)
 		{
             pendingUpdateLights.Add(PositionToInt(from.x, from.y, from.z));
 			
@@ -159,7 +159,7 @@ namespace CubeWorld.World.Lights
 			UpdateLuminanceLightVector(tileManager);
 		}
 			
-		static private void UpdateLuminanceLightVector(TileManager tileManager)
+		private static void UpdateLuminanceLightVector(TileManager tileManager)
 		{
 			while(pendingUpdateLights.Count > 0)
 			{

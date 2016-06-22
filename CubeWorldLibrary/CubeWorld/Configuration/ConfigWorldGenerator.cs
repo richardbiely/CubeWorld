@@ -1,5 +1,4 @@
-﻿using System;
-using CubeWorld.World.Generator;
+﻿using CubeWorld.World.Generator;
 
 namespace CubeWorld.Configuration
 {

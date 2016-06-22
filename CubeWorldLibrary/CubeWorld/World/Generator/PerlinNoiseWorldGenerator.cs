@@ -5,11 +5,11 @@ namespace CubeWorld.World.Generator
 {
     public class PerlinNoiseWorldGenerator : CubeWorldGenerator
     {
-        private WorldSizeRelativeValue fromYRV;
-        private WorldSizeRelativeValue toYRV;
-        private byte tileType;
-		private int octaves;
-		private float freq;
+        private readonly WorldSizeRelativeValue fromYRV;
+        private readonly WorldSizeRelativeValue toYRV;
+        private readonly byte tileType;
+		private readonly int octaves;
+		private readonly float freq;
 
         public PerlinNoiseWorldGenerator(
 			WorldSizeRelativeValue fromYRV,

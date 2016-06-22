@@ -1,4 +1,3 @@
-using System;
 using CubeWorld.Configuration;
 using CubeWorld.Items;
 using CubeWorld.Tiles;
@@ -10,7 +9,7 @@ namespace CubeWorld.Serialization
 {
 	public class RegisterSerializationTypes
 	{
-		static public void Register()
+		public static void Register()
 		{
 			Serializer.AddType(typeof(ConfigExtraMaterials));
 			Serializer.AddType(typeof(AvatarDefinition));
@@ -45,7 +44,7 @@ namespace CubeWorld.Serialization
 			Serializer.AddType(typeof(TileRuleSetDynamic));
 			Serializer.AddType(typeof(TileRuleSetOnFire));
 			Serializer.AddType(typeof(TileRuleSetTileType));
-			Serializer.AddType(typeof(CubeWorld.World.CubeWorld.MultiplayerConfig));
+			Serializer.AddType(typeof(World.CubeWorld.MultiplayerConfig));
 			Serializer.AddType(typeof(CWDefinition));
 			Serializer.AddType(typeof(CWVisualDefinition));
 		}

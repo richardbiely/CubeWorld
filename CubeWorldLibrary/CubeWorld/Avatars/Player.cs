@@ -1,6 +1,4 @@
-using System;
 using CubeWorld.Utils;
-using System.Collections.Generic;
 using CubeWorld.Items;
 using CubeWorld.Tiles;
 using SourceCode.CubeWorld.Utils;
@@ -14,7 +12,7 @@ namespace CubeWorld.Avatars
         public Inventory inventory;
         public TilePosition resetPosition;
 		
-        public Player(CubeWorld.World.CubeWorld world, AvatarDefinition avatarDefinition, int avatarId)
+        public Player(World.CubeWorld world, AvatarDefinition avatarDefinition, int avatarId)
 			: base(world, avatarDefinition, avatarId)
         {
             inventory = new Inventory(this);

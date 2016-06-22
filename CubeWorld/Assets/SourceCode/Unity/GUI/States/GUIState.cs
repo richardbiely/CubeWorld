@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class GUIState
+﻿public class GUIState
 {
     public virtual void OnActivated()
     {

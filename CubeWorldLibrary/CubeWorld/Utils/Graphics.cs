@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using CubeWorld.Tiles;
 using CubeWorld.Tiles.Rules;
 
@@ -12,17 +11,17 @@ namespace CubeWorld.Utils
         public const float QUART_TILE_SIZE = TILE_SIZE / 4.0f;
         public const float ITEM_TILE_SIZE = TILE_SIZE * 0.25f;
 
-        static public Vector3 TilePositionToVector3(int x, int y, int z)
+        public static Vector3 TilePositionToVector3(int x, int y, int z)
         {
             return new Vector3(x * TILE_SIZE, y * TILE_SIZE, z * TILE_SIZE);
         }
 
-        static public Vector3 TilePositionToVector3(TilePosition pos)
+        public static Vector3 TilePositionToVector3(TilePosition pos)
         {
             return new Vector3(pos.x * TILE_SIZE, pos.y * TILE_SIZE, pos.z * TILE_SIZE);
         }
 
-        static public TilePosition Vector3ToTilePosition(Vector3 vec)
+        public static TilePosition Vector3ToTilePosition(Vector3 vec)
         {
             return new TilePosition(
                 (int)Math.Round(vec.x / TILE_SIZE),
@@ -31,12 +30,12 @@ namespace CubeWorld.Utils
                     );
         }
 
-        static public int FloatToTilePosition(float f)
+        public static int FloatToTilePosition(float f)
         {
             return (int)Math.Round(f / TILE_SIZE);
         }
 
-        static public float TilePositionToFloat(int pos)
+        public static float TilePositionToFloat(int pos)
         {
             return pos * TILE_SIZE;
         }
@@ -59,7 +58,7 @@ namespace CubeWorld.Utils
             public Tile tile;
         }
 
-        static public TilePosition GetFaceNormal(Faces face)
+        public static TilePosition GetFaceNormal(Faces face)
         {
             switch (face)
             {
@@ -80,7 +79,7 @@ namespace CubeWorld.Utils
             return new TilePosition(0, 0, 0);
         }
 
-        static public Faces GetOpposingFace(Faces face)
+        public static Faces GetOpposingFace(Faces face)
         {
             switch (face)
             {
@@ -101,7 +100,7 @@ namespace CubeWorld.Utils
             return Faces.Left;
         }
 
-        static public RaycastTileResult RaycastTile(World.CubeWorld world, Vector3 from, Vector3 fwd, float maxDistance, bool ignoreNonSolid, bool ignoreNonClickable)
+        public static RaycastTileResult RaycastTile(World.CubeWorld world, Vector3 from, Vector3 fwd, float maxDistance, bool ignoreNonSolid, bool ignoreNonClickable)
         {
             Vector3 pos = from;
 
@@ -116,8 +115,8 @@ namespace CubeWorld.Utils
                 //Find near planes
                 for (int d = 0; d < 3; d++)
                 {
-                    near[d] = (float) Math.Round(near[d] / Graphics.TILE_SIZE) * Graphics.TILE_SIZE;
-                    near[d] += Graphics.HALF_TILE_SIZE * Math.Sign(fwd[d]);
+                    near[d] = (float) Math.Round(near[d] / TILE_SIZE) * TILE_SIZE;
+                    near[d] += HALF_TILE_SIZE * Math.Sign(fwd[d]);
                 }
 
                 //Calculate nearest plane
@@ -151,12 +150,12 @@ namespace CubeWorld.Utils
 
                 //See what tile is there
                 Vector3 d2 = new Vector3();
-                d2[lockedAxis] = Math.Sign(fwd[lockedAxis]) * Graphics.QUART_TILE_SIZE;
+                d2[lockedAxis] = Math.Sign(fwd[lockedAxis]) * QUART_TILE_SIZE;
 
-                TilePosition cursorPosition = Graphics.Vector3ToTilePosition(pos + d2);
+                TilePosition cursorPosition = Vector3ToTilePosition(pos + d2);
 
                 //Advance a little to stop the next loop from selecting the same tile / border
-                pos += fwd * Graphics.TILE_SIZE * 0.0001f;
+                pos += fwd * TILE_SIZE * 0.0001f;
 
 
                 //Now validate what to do :-)

@@ -6,7 +6,7 @@ using CubeWorld.Tiles;
 
 namespace CubeWorld.Serialization
 {
-    public class Serializer
+    public sealed class Serializer: IDisposable
     {
         private const byte TYPE_INT = 0;
         private const byte TYPE_BYTE = 1;
@@ -30,12 +30,12 @@ namespace CubeWorld.Serialization
         private const string ID_TAG = "__ID__";
 
         private bool serialization;
-        static private Dictionary<Type, String> serializablesTypesFromType = new Dictionary<Type, string>();
-        static private Dictionary<String, Type> serializablesTypesFromName = new Dictionary<string, Type>();
+        private static readonly Dictionary<Type, string> serializablesTypesFromType = new Dictionary<Type, string>();
+        private static readonly Dictionary<string, Type> serializablesTypesFromName = new Dictionary<string, Type>();
 
-        private Dictionary<ISerializable, int> serializedObjects = new Dictionary<ISerializable, int>();
-        private Dictionary<int, Dictionary<string, object>> deserializedObjects = new Dictionary<int, Dictionary<string, object>>();
-        private Dictionary<int, ISerializable> deserializedObjectsReal = new Dictionary<int, ISerializable>();
+        private readonly Dictionary<ISerializable, int> serializedObjects = new Dictionary<ISerializable, int>();
+        private readonly Dictionary<int, Dictionary<string, object>> deserializedObjects = new Dictionary<int, Dictionary<string, object>>();
+        private readonly Dictionary<int, ISerializable> deserializedObjectsReal = new Dictionary<int, ISerializable>();
 
         private MemoryStream memoryStream;
         private BinaryWriter binaryWriter;
@@ -55,12 +55,12 @@ namespace CubeWorld.Serialization
             this.serialization = serialization;
         }
 
-        static public void AddType(Type type)
+        public static void AddType(Type type)
         {
             AddType(type, type.Name);
         }
 
-        static public void AddType(Type type, String name)
+        public static void AddType(Type type, string name)
         {
             serializablesTypesFromName[name] = type;
             serializablesTypesFromType[type] = name;
@@ -567,6 +567,40 @@ namespace CubeWorld.Serialization
                         v = default(T);
                     }
                     currentObject = oldCurrentObject;
+                }
+            }
+        }
+
+        #endregion
+
+        #region IDisposable
+
+        ~Serializer()
+        {
+            Dispose(false);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                // free managed resources
+                if (memoryStream != null)
+                {
+                    memoryStream.Dispose();
+                    memoryStream = null;
+                }
+
+                if (binaryWriter!=null)
+                {
+                    binaryWriter.Close();
+                    binaryWriter = null;
                 }
             }
         }

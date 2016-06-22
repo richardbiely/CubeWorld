@@ -1,9 +1,9 @@
+using System;
 using UnityEngine;
-using System.Collections;
 using CubeWorld.Gameplay;
 using CubeWorld.Configuration;
 
-public class MainMenu
+public class MainMenu: IDisposable
 {
     private GameManagerUnity gameManagerUnity;
 
@@ -150,7 +150,7 @@ public class MainMenu
     }
 #endif
 
-    private CubeWorld.Configuration.Config lastConfig; 
+    private Config lastConfig; 
 
     void DrawMenuPause()
     {
@@ -421,7 +421,7 @@ public class MainMenu
 
         MenuSystem.LastButton("Generate!", delegate()
         {
-            lastConfig = new CubeWorld.Configuration.Config();
+            lastConfig = new Config();
             lastConfig.tileDefinitions = availableConfigurations.tileDefinitions;
 			lastConfig.itemDefinitions = availableConfigurations.itemDefinitions;
 			lastConfig.avatarDefinitions = availableConfigurations.avatarDefinitions;
@@ -479,4 +479,32 @@ public class MainMenu
         Rect dPosition = new Rect(Screen.width / 2 - 200, sbPosition.yMax + 10, 400, 25);
         GUI.Box(dPosition, description);
     }
+
+    #region IDisposable
+
+    ~MainMenu()
+    {
+        Dispose(false);
+    }
+
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    private void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            // free managed resources
+            if (wwwRequest != null)
+            {
+                wwwRequest.Dispose();
+                wwwRequest = null;
+            }
+        }
+    }
+
+    #endregion
 }

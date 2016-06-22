@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.IO;
-using System.Net;
 using System.Net.Sockets;
 
 namespace CubeWorld.Gameplay.Multiplayer
@@ -15,11 +12,11 @@ namespace CubeWorld.Gameplay.Multiplayer
 
         public int id = -1;
 
-        private MultiplayerStats stats;
-        private TcpClient tcpClient;
-        private IMultiplayerClientListener clientListener;
+        private readonly MultiplayerStats stats;
+        private readonly TcpClient tcpClient;
+        private readonly IMultiplayerClientListener clientListener;
 
-        private List<MultiplayerAction> actionsQueue = new List<MultiplayerAction>();
+        private readonly List<MultiplayerAction> actionsQueue = new List<MultiplayerAction>();
 
         private byte[] currentDataToSend;
         private int currentDataToSendOffset;
@@ -27,9 +24,9 @@ namespace CubeWorld.Gameplay.Multiplayer
         private byte[] currentDataToReceive;
         private int currentDataToReceiveOffset;
 
-        private MultiplayerServer server;
+        private readonly MultiplayerServer server;
 
-        private bool serverSide = false;
+        private readonly bool serverSide = false;
         private bool firstByte = true;
         public bool sendingPolicy = false;
         private bool policySent = false;
@@ -44,7 +41,7 @@ namespace CubeWorld.Gameplay.Multiplayer
 
         public MultiplayerClient(TcpClient tcpClient, MultiplayerServer server, IMultiplayerClientListener clientListener)
         {
-            this.stats = MultiplayerStats.Singleton;
+            stats = MultiplayerStats.Singleton;
             this.clientListener = clientListener;
 
             this.server = server;
@@ -223,7 +220,7 @@ namespace CubeWorld.Gameplay.Multiplayer
                         ex.SocketErrorCode != SocketError.NoBufferSpaceAvailable)
                     {
                         //It's a serious error.. re-throw the exception
-                        throw ex;
+                        throw;
                     }
                 }
 

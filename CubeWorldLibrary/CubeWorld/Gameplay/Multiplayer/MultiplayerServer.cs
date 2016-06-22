@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using CubeWorld.Console;
@@ -11,11 +8,11 @@ namespace CubeWorld.Gameplay.Multiplayer
 {
     public class MultiplayerServer
     {
-        private TcpListener serverSocket;
-        private List<MultiplayerClient> clients = new List<MultiplayerClient>();
+        private readonly TcpListener serverSocket;
+        private readonly List<MultiplayerClient> clients = new List<MultiplayerClient>();
 
-        private IMultiplayerServerListener serverListener;
-        private IMultiplayerClientListener clientListener;
+        private readonly IMultiplayerServerListener serverListener;
+        private readonly IMultiplayerClientListener clientListener;
 
         public MultiplayerServer(int port, IMultiplayerServerListener serverListener, IMultiplayerClientListener clientListener)
         {

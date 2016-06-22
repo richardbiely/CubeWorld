@@ -1,4 +1,3 @@
-using System;
 using CubeWorld.Configuration;
 using CubeWorld.Utils;
 using CubeWorld.Tiles;
@@ -23,16 +22,16 @@ namespace CubeWorld.World.Lights
 		{
 			this.world = world;
 
-            this.skyColor = skyColorDay;
-            this.ambientLightLuminance = Tile.MAX_LUMINANCE;
+            skyColor = skyColorDay;
+            ambientLightLuminance = Tile.MAX_LUMINANCE;
 		}
 		
 		public void Create(ConfigDayInfo configDayInfo)
 		{
             if (configDayInfo != null)
             {
-                this.dayTimeLuminances = configDayInfo.dayTimeLuminances;
-                this.dayDuration = configDayInfo.dayDuration;
+                dayTimeLuminances = configDayInfo.dayTimeLuminances;
+                dayDuration = configDayInfo.dayDuration;
             }
 		}
 		

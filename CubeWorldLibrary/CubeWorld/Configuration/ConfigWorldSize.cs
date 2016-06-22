@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CubeWorld.Configuration
+﻿namespace CubeWorld.Configuration
 {
     public class ConfigWorldSize
     {

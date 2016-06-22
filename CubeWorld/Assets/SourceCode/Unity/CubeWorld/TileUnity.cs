@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using CubeWorld.Tiles;
+using UnityEngine.Rendering;
 
 public class TileUnity : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class TileUnity : MonoBehaviour
         meshFilter = (MeshFilter)gameObject.AddComponent(typeof(MeshFilter));
         meshRenderer = (MeshRenderer)gameObject.AddComponent(typeof(MeshRenderer));
 
-        meshRenderer.castShadows = false;
+        meshRenderer.shadowCastingMode = ShadowCastingMode.Off;
         meshRenderer.receiveShadows = false;
 
         meshFilter.mesh = mesh;
@@ -91,16 +92,16 @@ public class TileUnity : MonoBehaviour
         }
     }
 	
-    static private List<Vector3> vertices = new List<Vector3>();
-    static private List<Vector2> uvs = new List<Vector2>();
-    static private List<Vector2> uvs2 = new List<Vector2>();
-    static private List<Vector3> normals = new List<Vector3>();
-    static private List<Color> colors = new List<Color>();
+    private static List<Vector3> vertices = new List<Vector3>();
+    private static List<Vector2> uvs = new List<Vector2>();
+    private static List<Vector2> uvs2 = new List<Vector2>();
+    private static List<Vector3> normals = new List<Vector3>();
+    private static List<Color> colors = new List<Color>();
 
-    static private List<int> trianglesNormal = new List<int>();
-    static private List<int> trianglesTransparent = new List<int>();
-    static private List<int> trianglesTranslucid = new List<int>();
-    static private List<int> trianglesDamage = new List<int>();
+    private static List<int> trianglesNormal = new List<int>();
+    private static List<int> trianglesTransparent = new List<int>();
+    private static List<int> trianglesTranslucid = new List<int>();
+    private static List<int> trianglesDamage = new List<int>();
 
     public void UpdateMesh()
     {

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using CubeWorld.Tiles;
 using CubeWorld.Utils;
 using CubeWorld.Items;
@@ -9,7 +7,6 @@ using CubeWorld.Avatars;
 using CubeWorld.Gameplay.Multiplayer;
 using SourceCode.CubeWorld.Utils;
 using System.IO;
-using Ionic.Zlib;
 
 namespace CubeWorld.Gameplay
 {
@@ -18,8 +15,8 @@ namespace CubeWorld.Gameplay
         public const int SERVER_PORT = 9999;
 
         private MultiplayerStats stats;
-        private BaseGameplay baseGameplay;
-        private bool createPlayer;
+        private readonly BaseGameplay baseGameplay;
+        private readonly bool createPlayer;
         private MultiplayerServer server;
 
         public MultiplayerServerGameplay(BaseGameplay baseGameplay, bool createPlayer) :
@@ -29,7 +26,7 @@ namespace CubeWorld.Gameplay
             this.createPlayer = createPlayer;
         }
 
-        public override void Init(CubeWorld.World.CubeWorld world)
+        public override void Init(World.CubeWorld world)
         {
             base.Init(world);
 
@@ -43,7 +40,7 @@ namespace CubeWorld.Gameplay
             server = new MultiplayerServer(9999, this, this);
         }
 
-        public override CubeWorld.World.Generator.GeneratorProcess Generate(CubeWorld.Configuration.Config config)
+        public override World.Generator.GeneratorProcess Generate(Configuration.Config config)
         {
             return baseGameplay.Generate(config);
         }
@@ -69,7 +66,7 @@ namespace CubeWorld.Gameplay
             base.Clear();
         }
 
-        public override void FillPlayerInventory(CubeWorld.Items.Inventory inventory)
+        public override void FillPlayerInventory(Inventory inventory)
         {
             baseGameplay.FillPlayerInventory(inventory);
         }
@@ -102,7 +99,7 @@ namespace CubeWorld.Gameplay
             return avatar;
         }
 
-        public override void DestroyAvatar(CubeWorld.Avatars.Avatar avatar)
+        public override void DestroyAvatar(Avatar avatar)
         {
             baseGameplay.DestroyAvatar(avatar);
 
@@ -142,7 +139,7 @@ namespace CubeWorld.Gameplay
             return baseGameplay.CreateItem(itemDefinition, position);
         }
 
-        private HashSet<TilePosition> invalidatedTiles = new HashSet<TilePosition>();
+        private readonly HashSet<TilePosition> invalidatedTiles = new HashSet<TilePosition>();
 
         public override void TileInvalidated(TilePosition pos, bool lightRelated)
         {
@@ -301,7 +298,7 @@ namespace CubeWorld.Gameplay
                         Int32.Parse(action.GetParameter(0)),
                         Int32.Parse(action.GetParameter(1)),
                         Int32.Parse(action.GetParameter(2)));
-                    this.TileClicked(pos);
+                    TileClicked(pos);
                     break;
                 }
 
@@ -314,7 +311,7 @@ namespace CubeWorld.Gameplay
                         Int32.Parse(action.GetParameter(2)),
                         Int32.Parse(action.GetParameter(3)));
 
-                    this.TileHit(pos, world.itemManager.GetItemDefinitionById(itemId));
+                    TileHit(pos, world.itemManager.GetItemDefinitionById(itemId));
                     break;
                 }
             }

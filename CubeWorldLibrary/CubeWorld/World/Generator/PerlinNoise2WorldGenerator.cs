@@ -5,11 +5,11 @@ namespace CubeWorld.World.Generator
 {
     public class PerlinNoise2WorldGenerator : CubeWorldGenerator
     {
-        private WorldSizeRelativeValue fromYRV;
-        private WorldSizeRelativeValue toYRV;
-        private byte tileType;
-		private int octaves;
-		private float freq;
+        private readonly WorldSizeRelativeValue fromYRV;
+        private readonly WorldSizeRelativeValue toYRV;
+        private readonly byte tileType;
+		private readonly int octaves;
+		private readonly float freq;
 
         public PerlinNoise2WorldGenerator(
 			WorldSizeRelativeValue fromYRV,
@@ -25,9 +25,9 @@ namespace CubeWorld.World.Generator
 			this.freq = freq;
         }
 		
-		static private int offX;
-		static private int offY;
-		static private bool offInitialized;
+		private static int offX;
+		private static int offY;
+		private static bool offInitialized;
 
         public override bool Generate(CubeWorld world)
         {
@@ -74,7 +74,7 @@ namespace CubeWorld.World.Generator
             return true;
         }
 
-        static double cosineinterpolation(double number1, double number2, double x)
+        private static double cosineinterpolation(double number1, double number2, double x)
         {
             double ft;
             double f;
@@ -85,7 +85,7 @@ namespace CubeWorld.World.Generator
             return ret;
         }
 
-        static double randomnumber(int x, int y)
+        private static double randomnumber(int x, int y)
         {
             int n = x + y * 57;
             n = (n << 13) ^ n;
@@ -94,7 +94,7 @@ namespace CubeWorld.World.Generator
             return ret;
         }
 
-        static float smoothrandom(int x, int y)
+        private static float smoothrandom(int x, int y)
         {
             double corners = (randomnumber(x - 1, y - 1) + randomnumber(x + 1, y - 1) + randomnumber(x - 1, y + 1) + randomnumber(x + 1, y + 1)) / 16;
             double sides = (randomnumber(x - 1, y) + randomnumber(x + 1, y) + randomnumber(x, y - 1) + randomnumber(x, y + 1)) / 8;
@@ -104,7 +104,7 @@ namespace CubeWorld.World.Generator
         }
 
         //Can use smoothrandom or randomnumber
-        static float noise(float x, float y)
+        private static float noise(float x, float y)
         {
             int xinterger = (int) x;
             float fractionx = x - xinterger;
@@ -122,7 +122,7 @@ namespace CubeWorld.World.Generator
             return ret;
         }
 
-        static float MultiFractal(float x, float y, int octaves, float amplitude, float frequency, float h, float lacunarity, float offset)
+        private static float MultiFractal(float x, float y, int octaves, float amplitude, float frequency, float h, float lacunarity, float offset)
         {
             float ret = 1;
             for (int i = 0; i < octaves; i++)
@@ -134,7 +134,7 @@ namespace CubeWorld.World.Generator
             return ret;
         }
 
-        static float FBM(float x, float y, int octaves, float amplitude, float frequency, float h, float lacunarity)
+        private static float FBM(float x, float y, int octaves, float amplitude, float frequency, float h, float lacunarity)
         {
             float ret = 0;
             for (int i = 0; i < octaves; i++)

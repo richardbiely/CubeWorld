@@ -1,5 +1,4 @@
-﻿using System;
-using CubeWorld.World.Lights;
+﻿using CubeWorld.World.Lights;
 
 namespace CubeWorld.Configuration
 {

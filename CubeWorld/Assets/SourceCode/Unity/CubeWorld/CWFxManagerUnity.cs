@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using CubeWorld.World;
 using UnityEngine;
-using CubeWorld.Tiles;
 using CubeWorld.World.Objects;
-using CubeWorld.Items;
 
 public class CWFxManagerUnity : ICWFxListener
 {
@@ -90,7 +88,7 @@ public class CWFxManagerUnity : ICWFxListener
     public void PlayEffect(string effectId, CubeWorld.Utils.Vector3 position)
     {
         if (effects.ContainsKey(effectId))
-            ((GameObject) GameObject.Instantiate(effects[effectId], GraphicsUnity.CubeWorldVector3ToVector3(position), Quaternion.identity)).transform.parent = goContainer.transform;
+            ((GameObject) Object.Instantiate(effects[effectId], GraphicsUnity.CubeWorldVector3ToVector3(position), Quaternion.identity)).transform.parent = goContainer.transform;
         else
             Debug.Log("Unknown effect: " + effectId);
     }
@@ -99,7 +97,7 @@ public class CWFxManagerUnity : ICWFxListener
     {
         if (effects.ContainsKey(effectId))
         {
-            ((GameObject) GameObject.Instantiate(effects[effectId], GraphicsUnity.CubeWorldVector3ToVector3(fromObject.position), Quaternion.identity)).transform.parent = goContainer.transform;
+            ((GameObject) Object.Instantiate(effects[effectId], GraphicsUnity.CubeWorldVector3ToVector3(fromObject.position), Quaternion.identity)).transform.parent = goContainer.transform;
         }
         else if (effectsComponents.ContainsKey(effectId))
         {

@@ -1,6 +1,4 @@
-﻿using System;
-using CubeWorld.Configuration;
-using CubeWorld.Tiles;
+﻿using CubeWorld.Tiles;
 using CubeWorld.Items;
 using CubeWorld.Avatars;
 

@@ -5,9 +5,9 @@ namespace CubeWorld.World.Generator
 {
     public class TopTileTransformationWorldGenerator : CubeWorldGenerator
     {
-        private byte fromType;
-        private byte toType;
-        private float probability;
+        private readonly byte fromType;
+        private readonly byte toType;
+        private readonly float probability;
 
         public TopTileTransformationWorldGenerator(byte fromType, byte toType, float probability)
         {

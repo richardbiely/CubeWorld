@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using CubeWorld.World.Objects;
 using UnityEngine;
 using CubeWorld.Tiles;
+using UnityEngine.Rendering;
 
 public class VisualDefinitionRenderUnity : MonoBehaviour
 {
-    static private List<Vector3> vertices = new List<Vector3>();
-    static private List<Vector3> normals = new List<Vector3>();
-    static private List<Color> colors = new List<Color>();
-    static private List<int> trianglesNormal = new List<int>();
+    private static List<Vector3> vertices = new List<Vector3>();
+    private static List<Vector3> normals = new List<Vector3>();
+    private static List<Color> colors = new List<Color>();
+    private static List<int> trianglesNormal = new List<int>();
 
     public CWVisualDefinition visualDefinition;
     public Material material;
@@ -27,7 +28,7 @@ public class VisualDefinitionRenderUnity : MonoBehaviour
         meshFilter = (MeshFilter)gameObject.AddComponent(typeof(MeshFilter));
         meshRenderer = (MeshRenderer)gameObject.AddComponent(typeof(MeshRenderer));
 
-        meshRenderer.castShadows = false;
+        meshRenderer.shadowCastingMode = ShadowCastingMode.Off;
         meshRenderer.receiveShadows = false;
     }
 
@@ -98,10 +99,10 @@ public class VisualDefinitionRenderUnity : MonoBehaviour
         meshFilter.sharedMesh = GetMeshForDefinition(visualDefinition, lightIntensity);
     }
 
-    static private Dictionary<CWVisualDefinition, Mesh> cacheBaseMeshes = new Dictionary<CWVisualDefinition, Mesh>();
-    static private Dictionary<CWVisualDefinition, Dictionary<int, Mesh>> cacheMeshes = new Dictionary<CWVisualDefinition, Dictionary<int, Mesh>>();
+    private static Dictionary<CWVisualDefinition, Mesh> cacheBaseMeshes = new Dictionary<CWVisualDefinition, Mesh>();
+    private static Dictionary<CWVisualDefinition, Dictionary<int, Mesh>> cacheMeshes = new Dictionary<CWVisualDefinition, Dictionary<int, Mesh>>();
 
-    static private Mesh GetMeshForDefinition(CWVisualDefinition visualDefinition, float lightIntensity)
+    private static Mesh GetMeshForDefinition(CWVisualDefinition visualDefinition, float lightIntensity)
     {
         int lightIntensityI = (int)(lightIntensity * 10);
         lightIntensity = (float) lightIntensityI / 10.0f;
@@ -136,7 +137,7 @@ public class VisualDefinitionRenderUnity : MonoBehaviour
         return mesh;
     }
 
-    static private Mesh GetBaseMeshForDefinition(CWVisualDefinition visualDefinition)
+    private static Mesh GetBaseMeshForDefinition(CWVisualDefinition visualDefinition)
     {
         Mesh mesh;
 
@@ -260,7 +261,7 @@ public class VisualDefinitionRenderUnity : MonoBehaviour
     }
 
 
-    static private Texture2D[] LoadImages(CWVisualDefinition visualDefinition)
+    private static Texture2D[] LoadImages(CWVisualDefinition visualDefinition)
     {
         Texture2D[] images = new Texture2D[visualDefinition.materialCount];
         for (int i = 0; i < visualDefinition.materialCount; i++)

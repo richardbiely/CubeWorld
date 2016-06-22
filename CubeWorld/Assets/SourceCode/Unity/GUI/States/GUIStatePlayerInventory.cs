@@ -87,7 +87,7 @@ public class GUIStatePlayerInventory : GUIState
             }
         }
 
-        foreach (TileDefinition tileDefinition in playerGUI.playerUnity.gameManagerUnity.world.tileManager.tileDefinitions)
+        foreach (TileDefinition tileDefinition in playerGUI.playerUnity.gameManagerUnity.world.tileManager.TileDefinitions)
         {
             if (tileDefinition.tileType != TileDefinition.EMPTY_TILE_TYPE)
             {

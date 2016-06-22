@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CubeWorld.Tiles;
 using CubeWorld.Sectors;
+using UnityEngine.Rendering;
 
 public class SectorUnity : MonoBehaviour, ISectorGraphics
 {
@@ -30,7 +31,7 @@ public class SectorUnity : MonoBehaviour, ISectorGraphics
         meshFilter = (MeshFilter)gameObject.AddComponent(typeof(MeshFilter));
         meshRenderer = (MeshRenderer)gameObject.AddComponent(typeof(MeshRenderer));
 
-        meshRenderer.castShadows = false;
+        meshRenderer.shadowCastingMode = ShadowCastingMode.Off;
         meshRenderer.receiveShadows = false;
 
         meshFilter.mesh = mesh;
@@ -49,9 +50,9 @@ public class SectorUnity : MonoBehaviour, ISectorGraphics
 	public void SetSector(Sector sector)
 	{
 		this.sector = sector;
-		this.willRequireMeshUpdate = true;
-		this.willRequireLightUpdate = false;
-        this.totalAmbientLuminance = -1;
+		willRequireMeshUpdate = true;
+		willRequireLightUpdate = false;
+        totalAmbientLuminance = -1;
 		
 		if (sector != null)
 		{
@@ -97,17 +98,17 @@ public class SectorUnity : MonoBehaviour, ISectorGraphics
         visibleByPlayer = false;
     }
 
-    static private List<Vector3> vertices = new List<Vector3>();
-    static private List<Vector2> uvs = new List<Vector2>();
-    static private List<Vector2> uvs2 = new List<Vector2>();
-    static private List<Vector3> normals = new List<Vector3>();
-    static private List<Color> colors = new List<Color>();
+    private static List<Vector3> vertices = new List<Vector3>();
+    private static List<Vector2> uvs = new List<Vector2>();
+    private static List<Vector2> uvs2 = new List<Vector2>();
+    private static List<Vector3> normals = new List<Vector3>();
+    private static List<Color> colors = new List<Color>();
 
-    static private List<int> trianglesNormal = new List<int>();
-    static private List<int> trianglesTransparent = new List<int>();
-    static private List<int> trianglesTranslucid = new List<int>();
-    static private List<int> trianglesDamage = new List<int>();
-	static private List<int> trianglesAnimated = new List<int>();
+    private static List<int> trianglesNormal = new List<int>();
+    private static List<int> trianglesTransparent = new List<int>();
+    private static List<int> trianglesTranslucid = new List<int>();
+    private static List<int> trianglesDamage = new List<int>();
+	private static List<int> trianglesAnimated = new List<int>();
 
     public void UpdateMesh()
     {
@@ -547,7 +548,7 @@ public class SectorUnity : MonoBehaviour, ISectorGraphics
     // 1    1   -1
     // 2   -1   -1
     // 3   -1    1
-    static private float[] GetLiquidVertexHeights(TileManager tileManager, TilePosition pos, Tile tile)
+    private static float[] GetLiquidVertexHeights(TileManager tileManager, TilePosition pos, Tile tile)
     {
         float[] liquidVertexHeights = new float[4];
 
@@ -580,7 +581,7 @@ public class SectorUnity : MonoBehaviour, ISectorGraphics
         return liquidVertexHeights;
     }
 
-    static private void UpdateLiquidVertexHeights(
+    private static void UpdateLiquidVertexHeights(
         TilePosition pos, 
         Tile tile, 
         float[] liquidVertexHeights,

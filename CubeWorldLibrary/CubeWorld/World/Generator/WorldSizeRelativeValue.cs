@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace CubeWorld.World.Generator
 {
@@ -17,20 +16,15 @@ namespace CubeWorld.World.Generator
             SizeVolumen
         }
 
-        private RelativeTo relativeTo;
-        private float value;
+        private readonly RelativeTo relativeTo;
+        private readonly float value;
 
-        private string expression;
-
-        public string Expression
-        {
-            get { return this.expression; }
-        }
+        public string Expression { get; }
 
         public WorldSizeRelativeValue(string expression)
         {
             expression = expression.ToLower().Trim();
-            this.expression = expression;
+            Expression = expression;
 
             if (expression.IndexOf('*') <= 0)
             {
@@ -41,7 +35,7 @@ namespace CubeWorld.World.Generator
                 }
                 else
                 {
-                    relativeTo = (RelativeTo)System.Enum.Parse(typeof(RelativeTo), expression, true);
+                    relativeTo = (RelativeTo)Enum.Parse(typeof(RelativeTo), expression, true);
                     value = 1.0f;
                 }
             }
@@ -51,7 +45,7 @@ namespace CubeWorld.World.Generator
                 if (strs.Length != 2)
                     throw new Exception("Invalid relative value string: " + expression);
 
-                relativeTo = (RelativeTo)System.Enum.Parse(typeof(RelativeTo), strs[0], true);
+                relativeTo = (RelativeTo)Enum.Parse(typeof(RelativeTo), strs[0], true);
 
                 value = float.Parse(strs[1].Trim(), System.Globalization.CultureInfo.InvariantCulture);
             }

@@ -7,15 +7,15 @@ namespace CubeWorld.Utils
 	public class Manhattan
 	{
 		private const int MAX_INIT = 32;
-		static private TilePosition[][] tilesAtDistance;
+		private static TilePosition[][] tilesAtDistance;
 		
-		static public int Distance(TilePosition t1, TilePosition t2)
+		public static int Distance(TilePosition t1, TilePosition t2)
 		{
 			TilePosition diff = t1 - t2;
 			return Math.Abs(diff.x) + Math.Abs(diff.y) + Math.Abs(diff.z);
 		}
 		
-		static private void InitValues()
+		private static void InitValues()
 		{
 			TilePosition center = new TilePosition();
 			Dictionary<int, List<TilePosition>> values = new Dictionary<int, List<TilePosition>>();
@@ -48,7 +48,7 @@ namespace CubeWorld.Utils
 		}	
 		
 		
-		static public TilePosition[] GetTilesAtDistance(int n)
+		public static TilePosition[] GetTilesAtDistance(int n)
 		{
 			if (tilesAtDistance == null)
 				InitValues();

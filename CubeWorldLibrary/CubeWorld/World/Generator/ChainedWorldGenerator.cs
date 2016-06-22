@@ -4,7 +4,7 @@ namespace CubeWorld.World.Generator
 {
     public class ChainedWorldGenerator : CubeWorldGenerator
     {
-        private List<CubeWorldGenerator> generators = new List<CubeWorldGenerator>();
+        private readonly List<CubeWorldGenerator> generators = new List<CubeWorldGenerator>();
         private int currentGeneratorIndex;
         private int currentCost;
 
@@ -56,10 +56,7 @@ namespace CubeWorld.World.Generator
 
         public override string ToString()
         {
-            if (currentGeneratorIndex < generators.Count)
-                return generators[currentGeneratorIndex].ToString();
-            else
-                return "All sort of things";
+            return currentGeneratorIndex < generators.Count ? generators[currentGeneratorIndex].ToString() : "All sort of things";
         }
     }
 }

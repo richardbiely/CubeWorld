@@ -1,5 +1,5 @@
 ﻿using System;
-using System.IO;
+
 namespace CubeWorld.Utils
 {
     public struct Vector3
@@ -31,7 +31,7 @@ namespace CubeWorld.Utils
         {
             get
             {
-                return this * (1.0f / this.magnitude);
+                return this * (1.0f / magnitude);
             }
         }
 

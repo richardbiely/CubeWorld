@@ -1,5 +1,4 @@
 ﻿using CubeWorld.Tiles.Rules;
-using CubeWorld.World;
 using CubeWorld.World.Objects;
 using CubeWorld.Serialization;
 namespace CubeWorld.Tiles

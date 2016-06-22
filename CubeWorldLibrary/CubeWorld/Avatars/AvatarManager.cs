@@ -1,5 +1,3 @@
-using System;
-using CubeWorld.World;
 using System.Collections.Generic;
 using CubeWorld.Tiles;
 using CubeWorld.Utils;
@@ -10,19 +8,19 @@ namespace CubeWorld.Avatars
 {
 	public class AvatarManager
 	{
-		private CubeWorld.World.CubeWorld world;
+		private readonly World.CubeWorld world;
 		
 		public AvatarDefinition[] avatarDefinitions;
         public Player player;
 		
-		private List<Avatar> avatars = new List<Avatar>();
+		private readonly List<Avatar> avatars = new List<Avatar>();
 
         public Avatar[] Avatars
         {
             get { return avatars.ToArray(); }
         }
 		
-		public AvatarManager (CubeWorld.World.CubeWorld world)
+		public AvatarManager (World.CubeWorld world)
 		{
 			this.world = world;
 		}
@@ -39,7 +37,7 @@ namespace CubeWorld.Avatars
             if (avatarDefinition.id == "player")
             {
                 avatar = new Player(world, avatarDefinition, objectId);
-                this.player = avatar as Player;
+                player = avatar as Player;
             }
             else if (avatarDefinition.id == "player_remote")
             {

@@ -5,10 +5,10 @@ namespace CubeWorld.World.Generator
 {
     public class SmoothWorldGenerator : CubeWorldGenerator
     {
-        private byte tileType;
-        private WorldSizeRelativeValue iterationsRV;
-        private WorldSizeRelativeValue minRadiusRV;
-        private WorldSizeRelativeValue maxRadiusRV;
+        private readonly byte tileType;
+        private readonly WorldSizeRelativeValue iterationsRV;
+        private readonly WorldSizeRelativeValue minRadiusRV;
+        private readonly WorldSizeRelativeValue maxRadiusRV;
 
         public SmoothWorldGenerator(
             byte tileType,

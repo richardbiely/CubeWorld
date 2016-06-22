@@ -1,9 +1,9 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using CubeWorld.Tiles;
 using Unity.CubeWorld.VisibleSectorsStrategies;
 using CubeWorld.Sectors;
+using Object = UnityEngine.Object;
 
 public class SectorManagerUnity
 {
@@ -32,7 +32,7 @@ public class SectorManagerUnity
 	public void Clear()
 	{
         foreach (SectorUnity unitySector in unitySectors)
-            GameObject.DestroyImmediate(unitySector.gameObject);
+            Object.DestroyImmediate(unitySector.gameObject);
 		
         unitySectors.Clear();
 		cacheSectors.Clear();
@@ -40,7 +40,7 @@ public class SectorManagerUnity
 
         if (goContainer)
         {
-            GameObject.DestroyImmediate(goContainer);
+            Object.DestroyImmediate(goContainer);
             goContainer = null;
         }
 
@@ -119,11 +119,11 @@ public class SectorManagerUnity
             switch (activeVisibleStrategy)
             {
                 case VisibleStrategy.Radius:
-                    this.visibleStrategy = new VisibleSectorsStrategyRadius(this, gameManagerUnity.world.sectorManager, gameManagerUnity.world.avatarManager.player, gameManagerUnity.playerUnity);
+                    visibleStrategy = new VisibleSectorsStrategyRadius(this, gameManagerUnity.world.sectorManager, gameManagerUnity.world.avatarManager.player, gameManagerUnity.playerUnity);
                     break;
 
                 case VisibleStrategy.All:
-                    this.visibleStrategy = new VisibleSectorsStrategyAll(this, gameManagerUnity.world.sectorManager);
+                    visibleStrategy = new VisibleSectorsStrategyAll(this, gameManagerUnity.world.sectorManager);
                     break;
             }
         }

@@ -5,11 +5,11 @@ namespace CubeWorld.World.Generator
 {
     public class HoleWorldGenerator : CubeWorldGenerator
     {
-        private WorldSizeRelativeValue iterationsRV;
-        private WorldSizeRelativeValue minRadiusRV;
-        private WorldSizeRelativeValue maxRadiusRV;
-        private WorldSizeRelativeValue minDepthRV;
-        private WorldSizeRelativeValue maxDepthRV;
+        private readonly WorldSizeRelativeValue iterationsRV;
+        private readonly WorldSizeRelativeValue minRadiusRV;
+        private readonly WorldSizeRelativeValue maxRadiusRV;
+        private readonly WorldSizeRelativeValue minDepthRV;
+        private readonly WorldSizeRelativeValue maxDepthRV;
 
         public HoleWorldGenerator(
             WorldSizeRelativeValue iterationsRV,

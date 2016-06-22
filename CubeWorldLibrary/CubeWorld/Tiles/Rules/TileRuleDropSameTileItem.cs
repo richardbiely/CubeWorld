@@ -1,5 +1,4 @@
-﻿using CubeWorld.Tiles;
-using CubeWorld.Items;
+﻿using CubeWorld.Items;
 using CubeWorld.Utils;
 using CubeWorld.Serialization;
 

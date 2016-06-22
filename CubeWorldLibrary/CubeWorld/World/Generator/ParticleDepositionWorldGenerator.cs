@@ -1,21 +1,20 @@
 ﻿using System;
 using CubeWorld.Tiles;
-using System.Collections.Generic;
 
 namespace CubeWorld.World.Generator
 {
     public class ParticleDepositionWorldGenerator : CubeWorldGenerator
     {
-        private Random generator = new Random();
+        private readonly Random generator = new Random();
 
-        private byte tileType;
-        private WorldSizeRelativeValue minParticlesRV;
-        private WorldSizeRelativeValue maxParticlesRV;
-        private WorldSizeRelativeValue minDropsRV;
-        private WorldSizeRelativeValue maxDropsRV;
+        private readonly byte tileType;
+        private readonly WorldSizeRelativeValue minParticlesRV;
+        private readonly WorldSizeRelativeValue maxParticlesRV;
+        private readonly WorldSizeRelativeValue minDropsRV;
+        private readonly WorldSizeRelativeValue maxDropsRV;
 
         private int sidesToCheck = 9;
-        private int[][] nearPositions;
+        private readonly int[][] nearPositions;
 
         public ParticleDepositionWorldGenerator(
             WorldSizeRelativeValue minParticlesRV,

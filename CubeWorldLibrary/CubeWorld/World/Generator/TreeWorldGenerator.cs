@@ -5,21 +5,21 @@ namespace CubeWorld.World.Generator
 {
     public class TreeWorldGenerator : CubeWorldGenerator
     {
-        private Random generator = new Random();
-        private byte tileTypeTrunk;
-        private byte tileTypeLeaves;
-        private byte overTileType;
-        private WorldSizeRelativeValue minRV;
-        private WorldSizeRelativeValue maxRV;
+        private readonly Random generator = new Random();
+        private readonly byte tileTypeTrunk;
+        private readonly byte tileTypeLeaves;
+        private readonly byte overTileType;
+        private readonly WorldSizeRelativeValue minRV;
+        private readonly WorldSizeRelativeValue maxRV;
 
-        private int minTrunkHeight = 2;
-        private int maxTrunkHeight = 2;
+        private readonly int minTrunkHeight = 2;
+        private readonly int maxTrunkHeight = 2;
 
-        private int minLeavesHeight = 3;
-        private int maxLeavesHeight = 4;
+        private readonly int minLeavesHeight = 3;
+        private readonly int maxLeavesHeight = 4;
 
-        private int minLeavesRadius = 1;
-        private int maxLeavesRadius = 2;
+        private readonly int minLeavesRadius = 1;
+        private readonly int maxLeavesRadius = 2;
 
         public TreeWorldGenerator(
             WorldSizeRelativeValue minRV,

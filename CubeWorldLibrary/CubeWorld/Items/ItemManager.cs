@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using CubeWorld.Utils;
 using CubeWorld.Items.Components;
@@ -8,18 +7,18 @@ namespace CubeWorld.Items
 {
 	public class ItemManager
 	{
-		public CubeWorld.World.CubeWorld world;
+		public World.CubeWorld world;
 			
 		public ItemDefinition[] itemDefinitions;
 
-        private List<Item> items = new List<Item>();
+        private readonly List<Item> items = new List<Item>();
 
         public Item[] Items
         {
             get { return items.ToArray(); }
         }
 
-		public ItemManager (CubeWorld.World.CubeWorld world)
+		public ItemManager (World.CubeWorld world)
 		{
 			this.world = world;
 		}
@@ -42,7 +41,7 @@ namespace CubeWorld.Items
         {
             Item item;
 
-            if (itemDefinition.type == CubeWorld.World.Objects.CWDefinition.DefinitionType.ItemTile)
+            if (itemDefinition.type == World.Objects.CWDefinition.DefinitionType.ItemTile)
                 item = new ItemTile(world, (ItemTileDefinition) itemDefinition, objectId);
             else
                 item = new Item(world, itemDefinition, objectId);
@@ -61,7 +60,7 @@ namespace CubeWorld.Items
         }
 
         private bool insideUpdate;
-        private List<Item> itemsToRemove = new List<Item>();
+        private readonly List<Item> itemsToRemove = new List<Item>();
 
         public void RemoveItem(Item item)
         {

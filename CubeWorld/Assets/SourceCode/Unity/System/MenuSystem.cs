@@ -1,32 +1,31 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public class MenuSystem
 {
-    static public GUISkin skin;
+    public static GUISkin skin;
 
     public delegate void OnPressedDelegate();
 
-    static private int cantidadBotones;
+    private static int cantidadBotones;
 
-    static private int focusedButton = 0;
+    private static int focusedButton = 0;
 
-    static private bool ignoreAxis;
-    static private bool ignoreButton;
+    private static bool ignoreAxis;
+    private static bool ignoreButton;
 
-    static private List<OnPressedDelegate> delegates = new List<OnPressedDelegate>();
+    private static List<OnPressedDelegate> delegates = new List<OnPressedDelegate>();
 
-    static public float vAxis = 0.0f;
-    static public bool actionButtonDown = false;
-    static public bool useKeyboard = true;
+    public static float vAxis = 0.0f;
+    public static bool actionButtonDown = false;
+    public static bool useKeyboard = true;
 
-    static public void ResetFocus()
+    public static void ResetFocus()
     {
         focusedButton = 0;
     }
 
-    static public void BeginMenu(string text)
+    public static void BeginMenu(string text)
     {
         cantidadBotones = 0;
         delegates.Clear();
@@ -38,7 +37,7 @@ public class MenuSystem
         GUI.Box(new Rect(0, 0, 400, 400), text);
     }
 
-    static public void Button(string text, OnPressedDelegate onPressed)
+    public static void Button(string text, OnPressedDelegate onPressed)
     {
         delegates.Add(onPressed);
 
@@ -50,7 +49,7 @@ public class MenuSystem
         cantidadBotones++;
     }
 
-    static public string TextField(string text)
+    public static string TextField(string text)
     {
         GUI.SetNextControlName("Boton" + cantidadBotones.ToString());
 
@@ -61,7 +60,7 @@ public class MenuSystem
         return text;
     }
 
-    static public void LastButton(string text, OnPressedDelegate onPressed)
+    public static void LastButton(string text, OnPressedDelegate onPressed)
     {
         delegates.Add(onPressed);
 
@@ -73,7 +72,7 @@ public class MenuSystem
         cantidadBotones++;
     }
 
-    static public void EndMenu()
+    public static void EndMenu()
     {
         GUI.EndGroup();
 

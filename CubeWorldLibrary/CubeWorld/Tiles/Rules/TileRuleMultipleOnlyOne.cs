@@ -1,6 +1,4 @@
-﻿using CubeWorld.Tiles;
-using System.Collections.Generic;
-using System;
+﻿using System;
 using CubeWorld.Serialization;
 
 namespace CubeWorld.Tiles.Rules
@@ -10,7 +8,7 @@ namespace CubeWorld.Tiles.Rules
         public TileRule[] otherRules;
         public bool useRandom;
 
-        private Random random = new Random();
+        private readonly Random random = new Random();
 
         public TileRuleMultipleOnlyOne()
         {

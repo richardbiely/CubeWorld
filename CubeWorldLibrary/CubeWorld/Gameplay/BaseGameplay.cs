@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using CubeWorld.Configuration;
 using CubeWorld.World.Generator;
 using System.IO;
 using CubeWorld.Tiles;
-using CubeWorld.Tiles.Rules;
 using CubeWorld.Items;
 using CubeWorld.Utils;
 using CubeWorld.Avatars;
@@ -16,23 +12,19 @@ namespace CubeWorld.Gameplay
 {
     public abstract class BaseGameplay
     {
-        private string id;
-        protected CubeWorld.World.CubeWorld world;
+        protected World.CubeWorld world;
 
         public bool useEnqueueTileUpdates = true;
         protected int lastObjectId;
 
-        public String Id
-        {
-            get { return id; }
-        }
+        public String Id { get; }
 
         public BaseGameplay(string id)
         {
-            this.id = id;
+            Id = id;
         }
 
-        public virtual void Init(CubeWorld.World.CubeWorld world)
+        public virtual void Init(World.CubeWorld world)
         {
             this.world = world;
         }
@@ -86,7 +78,7 @@ namespace CubeWorld.Gameplay
         {
             foreach (ItemDefinition itemDefinition in world.itemManager.itemDefinitions)
             {
-                if (itemDefinition.type != CubeWorld.World.Objects.CWDefinition.DefinitionType.ItemTile)
+                if (itemDefinition.type != CWDefinition.DefinitionType.ItemTile)
                 {
                     Item item = new Item(world, itemDefinition, -1);
 
@@ -99,7 +91,7 @@ namespace CubeWorld.Gameplay
                 }
             }
 
-            foreach (TileDefinition tileDefinition in world.tileManager.tileDefinitions)
+            foreach (TileDefinition tileDefinition in world.tileManager.TileDefinitions)
             {
                 if (tileDefinition.tileType != TileDefinition.EMPTY_TILE_TYPE)
                 {

@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using CubeWorld.Configuration;
-using CubeWorld;
 using CubeWorld.Gameplay;
 using CubeWorld.World;
 using CubeWorld.World.Generator;
 using CubeWorld.Console;
-using CubeWorldTestProject;
 
 namespace CubeWorldTestProject
 {
@@ -16,7 +13,7 @@ namespace CubeWorldTestProject
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             new TestSerializer();
             new TestProgram();
@@ -28,17 +25,17 @@ namespace CubeWorldTestProject
 
             AvailableConfigurations availableConfigurations = LoadConfiguration();
 
-            Config lastConfig;
-
-            lastConfig = new CubeWorld.Configuration.Config();
-            lastConfig.tileDefinitions = availableConfigurations.tileDefinitions;
-            lastConfig.itemDefinitions = availableConfigurations.itemDefinitions;
-            lastConfig.avatarDefinitions = availableConfigurations.avatarDefinitions;
-            lastConfig.dayInfo = availableConfigurations.dayInfos[0];
-            lastConfig.worldGenerator = availableConfigurations.worldGenerators[0];
-            lastConfig.worldSize = availableConfigurations.worldSizes[0];
-            lastConfig.extraMaterials = availableConfigurations.extraMaterials;
-            lastConfig.gameplay = GameplayFactory.AvailableGameplays[0];
+            Config lastConfig = new Config
+            {
+                tileDefinitions = availableConfigurations.tileDefinitions,
+                itemDefinitions = availableConfigurations.itemDefinitions,
+                avatarDefinitions = availableConfigurations.avatarDefinitions,
+                dayInfo = availableConfigurations.dayInfos[0],
+                worldGenerator = availableConfigurations.worldGenerators[0],
+                worldSize = availableConfigurations.worldSizes[0],
+                extraMaterials = availableConfigurations.extraMaterials,
+                gameplay = GameplayFactory.AvailableGameplays[0]
+            };
 
             CubeWorld.World.CubeWorld world = new CubeWorld.World.CubeWorld(this, this);
             GeneratorProcess worldGeneratorProcess = world.Generate(lastConfig);
@@ -51,7 +48,7 @@ namespace CubeWorldTestProject
             Console.WriteLine("World generated");
         }
 
-        static public AvailableConfigurations LoadConfiguration()
+        public static AvailableConfigurations LoadConfiguration()
         {
             AvailableConfigurations availableConfigurations =
                 new ConfigParserXML().Parse(
@@ -64,7 +61,7 @@ namespace CubeWorldTestProject
             return availableConfigurations;
         }
 
-        static public string GetConfigText(string resourceName)
+        public static string GetConfigText(string resourceName)
         {
             string exePath = System.IO.Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath);
             string fileConfigPath = System.IO.Path.Combine(exePath, resourceName + ".xml");

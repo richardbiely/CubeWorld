@@ -1,6 +1,3 @@
-using System;
-using CubeWorld.Utils;
-using CubeWorld.World;
 using CubeWorld.World.Objects;
 
 namespace CubeWorld.Tiles
@@ -15,30 +12,23 @@ namespace CubeWorld.Tiles
          *  always use TileManager.SetTileDynamicTimeout()
          */
         public int timeout;
-		
-		private bool proxy;
-		
-		private bool onFire;
-		private bool castShadow;
-		private bool lightSource;
-		private bool enqueued;
-		private byte ambientLuminance;
-		private byte lightSourceLuminance;
-		private bool dynamic;
-        private byte extraData;
 
-        private bool invalidated;
-		
-		public bool IsProxy
-		{
-			get { return proxy; }
-		}
-		
-		public bool OnFire
+	    private readonly bool onFire;
+		private readonly bool castShadow;
+		private readonly bool lightSource;
+		private readonly bool enqueued;
+		private readonly byte ambientLuminance;
+		private readonly byte lightSourceLuminance;
+		private readonly bool dynamic;
+        private readonly byte extraData;
+
+	    public bool IsProxy { get; }
+
+	    public bool OnFire
 		{
 			get 
 			{ 
-				if (proxy) 
+				if (IsProxy) 
 					return world.tileManager.GetTile(tilePosition).OnFire;
 				else
 					return onFire;
@@ -49,7 +39,7 @@ namespace CubeWorld.Tiles
 		{
 			get 
 			{ 
-				if (proxy) 
+				if (IsProxy) 
 					return world.tileManager.GetTile(tilePosition).CastShadow;
 				else
 					return castShadow;
@@ -60,7 +50,7 @@ namespace CubeWorld.Tiles
 		{
 			get 
 			{ 
-				if (proxy) 
+				if (IsProxy) 
 					return world.tileManager.GetTile(tilePosition).LightSource;
 				else
 					return lightSource;
@@ -71,7 +61,7 @@ namespace CubeWorld.Tiles
 		{
 			get 
 			{ 
-				if (proxy) 
+				if (IsProxy) 
 					return world.tileManager.GetTile(tilePosition).Enqueued;
 				else
 					return enqueued;
@@ -83,7 +73,7 @@ namespace CubeWorld.Tiles
         {
             get
             {
-                if (proxy)
+                if (IsProxy)
                     return world.tileManager.GetTile(tilePosition).ExtraData;
                 else
                     return extraData;
@@ -94,7 +84,7 @@ namespace CubeWorld.Tiles
 		{
 			get 
 			{ 
-				if (proxy) 
+				if (IsProxy) 
 					return world.tileManager.GetTile(tilePosition).AmbientLuminance;
 				else
 					return ambientLuminance;
@@ -105,7 +95,7 @@ namespace CubeWorld.Tiles
 		{
 			get 
 			{ 
-				if (proxy) 
+				if (IsProxy) 
 					return world.tileManager.GetTile(tilePosition).LightSourceLuminance;
 				else
 					return lightSourceLuminance;
@@ -116,7 +106,7 @@ namespace CubeWorld.Tiles
 		{
 			get 
 			{ 
-				if (proxy) 
+				if (IsProxy) 
 					return world.tileManager.GetTile(tilePosition).Energy;
 				else
 					return energy;
@@ -127,7 +117,7 @@ namespace CubeWorld.Tiles
 		{
 			get 
 			{ 
-				if (proxy) 
+				if (IsProxy) 
 					return world.tileManager.GetTile(tilePosition).Destroyed;
 				else
 					return destroyed;
@@ -138,63 +128,59 @@ namespace CubeWorld.Tiles
 		{
 			get 
 			{ 
-				if (proxy) 
+				if (IsProxy) 
 					return world.tileManager.GetTile(tilePosition).Dynamic;
 				else
 					return dynamic;
 			}
 		}
 
-        public bool Invalidated
-        {
-            get { return this.invalidated; }
-            set { this.invalidated = value; }
-        }
+        public bool Invalidated { get; set; }
 
-        public DynamicTile(CubeWorld.World.CubeWorld world, TileDefinition tileDefinition, int objectId)
+	    public DynamicTile(World.CubeWorld world, TileDefinition tileDefinition, int objectId)
             : base(objectId)
 		{
 			this.world = world;
-			this.definition = tileDefinition;
+			definition = tileDefinition;
 			this.tileDefinition = tileDefinition;
 			
-			this.onFire = false;
-			this.castShadow = tileDefinition.castShadow;
-			this.lightSource = tileDefinition.lightSourceIntensity > 0;
-			this.enqueued = false;
-			this.ambientLuminance = 0;
-			this.lightSourceLuminance = tileDefinition.lightSourceIntensity;
-			this.energy = (byte) tileDefinition.energy;
-			this.destroyed = false;
-			this.dynamic = true;
-            this.extraData = 0;
+			onFire = false;
+			castShadow = tileDefinition.castShadow;
+			lightSource = tileDefinition.lightSourceIntensity > 0;
+			enqueued = false;
+			ambientLuminance = 0;
+			lightSourceLuminance = tileDefinition.lightSourceIntensity;
+			energy = (byte) tileDefinition.energy;
+			destroyed = false;
+			dynamic = true;
+            extraData = 0;
 		}
 
-        public DynamicTile(CubeWorld.World.CubeWorld world, TilePosition tilePosition, bool proxy, int objectId)
+        public DynamicTile(World.CubeWorld world, TilePosition tilePosition, bool proxy, int objectId)
             : base(objectId)
 		{
 			this.world = world;
 			this.tilePosition = tilePosition;
-			this.position = Utils.Graphics.TilePositionToVector3(tilePosition);
-			this.proxy = proxy;
+			position = Utils.Graphics.TilePositionToVector3(tilePosition);
+			IsProxy = proxy;
 			
 			Tile tile = world.tileManager.GetTile(tilePosition);
 			
-			this.tileDefinition = world.tileManager.GetTileDefinition(tile.tileType);
-			this.definition = this.tileDefinition;
+			tileDefinition = world.tileManager.GetTileDefinition(tile.tileType);
+			definition = tileDefinition;
 			
 			if (proxy == false)
 			{
-				this.onFire = tile.OnFire;
-				this.castShadow = tile.CastShadow;
-				this.lightSource = tile.LightSource;
-				this.enqueued = tile.Enqueued;
-				this.ambientLuminance = tile.AmbientLuminance;
-				this.lightSourceLuminance = tile.LightSourceLuminance;
-				this.energy = tile.Energy;
-				this.destroyed = tile.Destroyed;
-				this.dynamic = tile.Dynamic;
-                this.extraData = tile.ExtraData;
+				onFire = tile.OnFire;
+				castShadow = tile.CastShadow;
+				lightSource = tile.LightSource;
+				enqueued = tile.Enqueued;
+				ambientLuminance = tile.AmbientLuminance;
+				lightSourceLuminance = tile.LightSourceLuminance;
+				energy = tile.Energy;
+				destroyed = tile.Destroyed;
+				dynamic = tile.Dynamic;
+                extraData = tile.ExtraData;
 			}
 		}
 		
@@ -202,17 +188,17 @@ namespace CubeWorld.Tiles
 		{
 			Tile tile = new Tile();
 			
-			tile.tileType = this.tileDefinition.tileType;
-			tile.OnFire = this.OnFire;
-			tile.CastShadow = this.CastShadow;
-			tile.LightSource = this.LightSource;
-			tile.Enqueued = this.Enqueued;
-			tile.AmbientLuminance = this.AmbientLuminance;
-			tile.LightSourceLuminance = this.LightSourceLuminance;
-			tile.Energy = this.Energy;
-			tile.Destroyed = this.Destroyed;
-			tile.Dynamic = this.Dynamic;
-            tile.ExtraData = this.extraData;
+			tile.tileType = tileDefinition.tileType;
+			tile.OnFire = OnFire;
+			tile.CastShadow = CastShadow;
+			tile.LightSource = LightSource;
+			tile.Enqueued = Enqueued;
+			tile.AmbientLuminance = AmbientLuminance;
+			tile.LightSourceLuminance = LightSourceLuminance;
+			tile.Energy = Energy;
+			tile.Destroyed = Destroyed;
+			tile.Dynamic = Dynamic;
+            tile.ExtraData = extraData;
 			
 			return tile;
 		}
@@ -242,7 +228,7 @@ namespace CubeWorld.Tiles
 
         public void Invalidate()
         {
-            invalidated = true;
+            Invalidated = true;
         }
     }
 }

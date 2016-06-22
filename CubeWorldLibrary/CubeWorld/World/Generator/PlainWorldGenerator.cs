@@ -1,13 +1,12 @@
-﻿using System;
-using CubeWorld.Tiles;
+﻿using CubeWorld.Tiles;
 
 namespace CubeWorld.World.Generator
 {
     public class PlainWorldGenerator : CubeWorldGenerator
     {
-        private WorldSizeRelativeValue fromYRV;
-        private WorldSizeRelativeValue toYRV;
-        private byte tileType;
+        private readonly WorldSizeRelativeValue fromYRV;
+        private readonly WorldSizeRelativeValue toYRV;
+        private readonly byte tileType;
 
         public PlainWorldGenerator(
             WorldSizeRelativeValue fromYRV,

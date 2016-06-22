@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace CubeWorld.Gameplay.Multiplayer
+﻿namespace CubeWorld.Gameplay.Multiplayer
 {
     public class MultiplayerStats
     {
@@ -11,9 +6,9 @@ namespace CubeWorld.Gameplay.Multiplayer
         {
         }
 
-        static private MultiplayerStats singleton;
+        private static MultiplayerStats singleton;
 
-        static public MultiplayerStats Singleton
+        public static MultiplayerStats Singleton
         {
             get { if (singleton == null) singleton = new MultiplayerStats(); return singleton; }
         }

@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace CubeWorld.World.Generator
+﻿namespace CubeWorld.World.Generator
 {
     public class GeneratorProcess
     {
-        private CubeWorldGenerator generator;
-        private CubeWorld world;
+        private readonly CubeWorldGenerator generator;
+        private readonly CubeWorld world;
 
         private bool finished = false;
 
-        private int totalCost;
+        private readonly int totalCost;
 
         public GeneratorProcess(CubeWorldGenerator generator, CubeWorld world)
         {
-            this.finished = false;
+            finished = false;
             this.generator = generator;
             this.world = world;
 

@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using CubeWorld.Utils;
-using CubeWorld.World;
 using CubeWorld.World.Objects;
 using CubeWorld.Avatars.Components;
 
@@ -11,13 +7,13 @@ namespace CubeWorld.Avatars
     {
         public AvatarInput input;
 
-        public Avatar(CubeWorld.World.CubeWorld world, AvatarDefinition avatarDefinition, int objectId)
+        public Avatar(World.CubeWorld world, AvatarDefinition avatarDefinition, int objectId)
             : base(objectId)
         {
             this.world = world;
-			this.definition = avatarDefinition;
+			definition = avatarDefinition;
 
-            this.input = new AvatarInput();
+            input = new AvatarInput();
 
             AddComponent(new AvatarComponentPhysics());
         }

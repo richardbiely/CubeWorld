@@ -1,19 +1,18 @@
 ﻿using CubeWorld.World.Objects;
 using CubeWorld.Utils;
-using CubeWorld.Tiles;
 using System;
 
 namespace CubeWorld.Avatars.Components
 {
     public class AvatarComponentIA : CWComponent
     {
-        static private Random random = new Random();
+        private static readonly Random random = new Random();
 
         private Avatar avatar;
 
         protected override void OnAddedToObject(CWObject cwobject)
         {
-            this.avatar = (Avatar) cwobject;
+            avatar = (Avatar) cwobject;
         }
 
         protected override void OnRemovedFromObject()

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using CubeWorld.Tiles;
+﻿using CubeWorld.Tiles;
 using CubeWorld.World.Generator;
-using CubeWorld.Tiles.Rules;
 using CubeWorld.Sectors;
 using CubeWorld.Utils;
 using CubeWorld.World.Lights;
@@ -47,18 +43,18 @@ namespace CubeWorld.World
         {
 			this.cwListener = cwListener;
             this.fxListener = fxListener;
-            this.sectorManager = new SectorManager(this);
-			this.tileManager = new TileManager(this);
-			this.itemManager = new ItemManager(this);
-			this.avatarManager = new AvatarManager(this);
-			this.dayCycleManager = new DayCycleManager(this);
+            sectorManager = new SectorManager(this);
+			tileManager = new TileManager(this);
+			itemManager = new ItemManager(this);
+			avatarManager = new AvatarManager(this);
+			dayCycleManager = new DayCycleManager(this);
         }
 
         public GeneratorProcess Generate(Config config)
         {
-            this.sizeXbits = config.worldSize.worldSizeBitsX;
-            this.sizeYbits = config.worldSize.worldSizeBitsY;
-            this.sizeZbits = config.worldSize.worldSizeBitsZ;
+            sizeXbits = config.worldSize.worldSizeBitsX;
+            sizeYbits = config.worldSize.worldSizeBitsY;
+            sizeZbits = config.worldSize.worldSizeBitsZ;
 
             sizeX = 1 << sizeXbits;
             sizeY = 1 << sizeYbits;
@@ -300,9 +296,9 @@ namespace CubeWorld.World
 
         private void Load(BinaryReader br, bool isMultiplayer)
         {
-            this.sizeXbits = br.ReadInt32();
-            this.sizeYbits = br.ReadInt32();
-            this.sizeZbits = br.ReadInt32();
+            sizeXbits = br.ReadInt32();
+            sizeYbits = br.ReadInt32();
+            sizeZbits = br.ReadInt32();
 
             sizeX = 1 << sizeXbits;
             sizeY = 1 << sizeYbits;
@@ -357,7 +353,7 @@ namespace CubeWorld.World
 
             public void Serialize(Serializer serializer)
             {
-                serializer.Serialize(ref tileDefinitions, "tileDefinitions");
+                serializer.Serialize(ref tileDefinitions, "TileDefinitions");
                 serializer.Serialize(ref itemDefinitions, "itemDefinitions");
                 serializer.Serialize(ref avatarDefinitions, "avatarDefinitions");
                 serializer.Serialize(ref extraMaterials, "extraMaterials");
@@ -367,10 +363,10 @@ namespace CubeWorld.World
         private void SaveDefinitions(BinaryWriter bw)
         {
             MultiplayerConfig config = new MultiplayerConfig();
-            config.tileDefinitions = tileManager.tileDefinitions;
+            config.tileDefinitions = tileManager.TileDefinitions;
             config.itemDefinitions = itemManager.itemDefinitions;
             config.avatarDefinitions = avatarManager.avatarDefinitions;
-            config.extraMaterials = this.configExtraMaterials;
+            config.extraMaterials = configExtraMaterials;
 			
 			RegisterSerializationTypes.Register();
             byte[] data = new Serializer(true).Serialize(config);

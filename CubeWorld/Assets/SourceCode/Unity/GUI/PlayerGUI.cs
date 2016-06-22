@@ -1,8 +1,5 @@
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
-using CubeWorld.Tiles;
-using CubeWorld.World.Objects;
 
 public class PlayerGUI : MonoBehaviour 
 {
@@ -21,15 +18,15 @@ public class PlayerGUI : MonoBehaviour
 
     public State ActiveState
     {
-        get { return this.state; }
+        get { return state; }
         set
         {
             if (value != state)
             {
                 activeGUIState.OnDeactivated();
-                this.state = value;
-                this.activeGUIState = availableStates[state];
-                this.activeGUIState.OnActivated();
+                state = value;
+                activeGUIState = availableStates[state];
+                activeGUIState.OnActivated();
             }
         }
     }
@@ -72,13 +69,13 @@ public class PlayerGUI : MonoBehaviour
 
     public void EnterInventory()
     {
-        playerUnity.gameManagerUnity.ReleaseCursor();
+        GameManagerUnity.ReleaseCursor();
         ActiveState = State.INVENTORY;
     }
 
     public void ExitInventory()
     {
-        playerUnity.gameManagerUnity.LockCursor();
+        GameManagerUnity.LockCursor();
         ActiveState = State.NORMAL;
     }
 

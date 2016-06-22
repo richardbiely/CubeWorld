@@ -1,14 +1,13 @@
-﻿using System;
-using CubeWorld.Tiles;
+﻿using CubeWorld.Tiles;
 
 namespace CubeWorld.World.Generator
 {
     public class WaterWorldGenerator : CubeWorldGenerator
     {
-        private WorldSizeRelativeValue fromYRV;
-        private WorldSizeRelativeValue toYRV;
+        private readonly WorldSizeRelativeValue fromYRV;
+        private readonly WorldSizeRelativeValue toYRV;
 
-        private byte waterTileType;
+        private readonly byte waterTileType;
 
         public WaterWorldGenerator(
             WorldSizeRelativeValue fromYRV,

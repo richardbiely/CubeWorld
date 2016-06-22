@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using CubeWorld.Gameplay;
 using CubeWorld.Gameplay.Multiplayer;
 using CubeWorld.Console;
 

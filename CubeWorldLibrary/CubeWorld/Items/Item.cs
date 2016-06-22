@@ -1,6 +1,3 @@
-using System;
-using CubeWorld.Utils;
-using CubeWorld.World;
 using CubeWorld.World.Objects;
 
 namespace CubeWorld.Items
@@ -9,11 +6,11 @@ namespace CubeWorld.Items
 	{
 		public ItemDefinition itemDefinition;
 		
-        public Item(CubeWorld.World.CubeWorld world, ItemDefinition itemDefinition, int objectId) 
+        public Item(World.CubeWorld world, ItemDefinition itemDefinition, int objectId) 
             : base(objectId)
 		{
 			this.world = world;
-			this.definition = itemDefinition;
+			definition = itemDefinition;
 			this.itemDefinition = itemDefinition;
 		}
     }

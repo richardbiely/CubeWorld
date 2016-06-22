@@ -15,15 +15,15 @@ public class WorldManagerUnity
 
 #if !UNITY_WEBPLAYER
 
-    static public string GetWorldFilePath(int n)
+    public static string GetWorldFilePath(int n)
     {
         string exePath = System.IO.Directory.GetParent(Application.dataPath).FullName;
         return System.IO.Path.Combine(exePath, "world" + n + ".map");
     }
 
-    static private Dictionary<int, System.DateTime> worldFileInfoCache = new Dictionary<int, System.DateTime>();
+    private static Dictionary<int, System.DateTime> worldFileInfoCache = new Dictionary<int, System.DateTime>();
 
-    static public System.DateTime GetWorldFileInfo(int n)
+    public static System.DateTime GetWorldFileInfo(int n)
     {
         if (worldFileInfoCache.ContainsKey(n) == false)
         {
@@ -75,7 +75,7 @@ public class WorldManagerUnity
 
             byte[] data = System.IO.File.ReadAllBytes(GetWorldFilePath(n));
 
-            CubeWorld.Configuration.Config config = new CubeWorld.Configuration.Config();
+            Config config = new Config();
             config.tileDefinitions = configurations.tileDefinitions;
 			config.itemDefinitions = configurations.itemDefinitions;
 			config.avatarDefinitions = configurations.avatarDefinitions;
@@ -153,9 +153,9 @@ public class WorldManagerUnity
     }
 
 
-    public CubeWorld.World.Generator.GeneratorProcess worldGeneratorProcess;
+    public GeneratorProcess worldGeneratorProcess;
 
-    public void CreateRandomWorld(CubeWorld.Configuration.Config config)
+    public void CreateRandomWorld(Config config)
     {
         gameManagerUnity.DestroyWorld();
 
